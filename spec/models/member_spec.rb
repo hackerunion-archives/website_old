@@ -8,4 +8,12 @@ describe Member do
     m.name.should == name
   end
 
+  it "has many affiliations" do
+    m = Member.create! :name => "Jim"
+    a = m.affiliations.build
+    a.name = "Cyrus"
+    m.save!
+    m.affiliations.first.name.should == "Cyrus"
+  end
+
 end
