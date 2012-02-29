@@ -5,7 +5,7 @@
 <% @members.each do |member| %>
 <tr>
   <td><%= member.name %></td>
-  <td><%= member.affiliations.collect(&:name).join(" ") %></td>
+  <td><%= affiliations_list_for(member) %></td>
 </tr>
 <% end %>
 </table>
