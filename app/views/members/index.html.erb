@@ -1,7 +1,11 @@
 <h1>Members</h1>
 
 <table>
+<tr><th>Name</th><th>Affiliations</th></tr>
 <% @members.each do |member| %>
-<tr><td><%= member.name %></td></tr>
+<tr>
+  <td><%= member.name %></td>
+  <td><%= member.affiliations.collect(&:name).join(" ") %></td>
+</tr>
 <% end %>
 </table>
