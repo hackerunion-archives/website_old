@@ -17,4 +17,10 @@ describe Member do
     m.affiliations.first.name.should == "Cyrus"
   end
 
+  it "provides a mechanism for approving pending members" do
+    m = Member.create! :name => "Jim"
+    m.approve!
+    m.pending.should == false
+  end
+
 end

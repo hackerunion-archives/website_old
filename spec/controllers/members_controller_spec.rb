@@ -70,4 +70,12 @@ describe MembersController do
     Member.last.affiliations.should == []
   end
 
+  it "can approve a pending member" do
+    m = Member.create! :name => "Jim"
+    get :approve, {:id => m}
+    assigns[:member].name.should == "Jim"
+    m.reload
+    m.pending.should == false
+  end
+
 end

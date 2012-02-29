@@ -57,6 +57,9 @@ Hackerunion::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :members do
+    member do
+      get :approve
+    end
     collection do
       get :pending
     end

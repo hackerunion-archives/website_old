@@ -23,6 +23,11 @@ class MembersController < ApplicationController
     end
   end
 
+  def approve
+    @member = Member.find(params[:id])
+    @member.approve!
+  end
+
 private
 
   def parse_affiliation_list affiliations
