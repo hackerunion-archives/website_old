@@ -3,8 +3,8 @@ require 'spec_helper'
 describe MembersController do
 
   it "lists all members" do
-    m1 = Member.create! :name => "Jim"
-    m2 = Member.create! :name => "Aldric"
+    m1 = Member.create! :name => "Jim", :pending => false
+    m2 = Member.create! :name => "Aldric", :pending => false
     get :index
     assigns[:members].first.name.should == "Jim"
     assigns[:members].last.name.should == "Aldric"
@@ -14,10 +14,20 @@ describe MembersController do
   it "excludes pending members from member list" do
     m1 = Member.create! :name => "Jim"
     m2 = Member.create! :name => "Aldric", :pending => false
-    get :index
+    get :pending
     members = assigns[:members]
     members.size.should == 1
-    assigns[:members].first.name.should == "Aldric"
+    assigns[:members].first.name.should == "Jim"
+    response.should render_template("pending")
+  end
+
+  it "lists pending members" do
+    m1 = Member.create! :name => "Jim"
+    m2 = Member.create! :name => "Aldric", :pending => false
+    get :pending
+    members = assigns[:members]
+    members.size.should == 1
+    assigns[:members].first.name.should == "Jim"
   end
 
   it "presents a new member form" do

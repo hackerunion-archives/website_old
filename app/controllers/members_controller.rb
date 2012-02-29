@@ -4,6 +4,10 @@ class MembersController < ApplicationController
     @members = Member.where(:pending => false)
   end
 
+  def pending
+    @members = Member.where(:pending => true)
+  end
+
   def new
     @member = Member.new
   end

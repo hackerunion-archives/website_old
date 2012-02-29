@@ -1,0 +1,9 @@
+<table>
+  <tr><th>Name</th><th>Affiliations</th></tr>
+  <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= affiliations_list_for(member) %></td>
+      </tr>
+  <% end %>
+</table>
