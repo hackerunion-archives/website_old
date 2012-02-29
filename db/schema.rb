@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229182757) do
+ActiveRecord::Schema.define(:version => 20120229195343) do
 
   create_table "affiliations", :force => true do |t|
     t.string "name"
@@ -25,7 +25,8 @@ ActiveRecord::Schema.define(:version => 20120229182757) do
   add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "index_affiliations_members_on_affiliation_id_and_member_id"
 
   create_table "members", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "pending", :default => true, :null => false
   end
 
   create_table "skills", :force => true do |t|

@@ -6,6 +6,7 @@ describe Member do
     name = "Jim"
     m = Member.create! :name => name
     m.name.should == name
+    m.pending.should == true
   end
 
   it "has many affiliations" do
