@@ -11,6 +11,15 @@ describe MembersController do
     response.should render_template("index")
   end
 
+  it "excludes pending members from member list" do
+    m1 = Member.create! :name => "Jim"
+    m2 = Member.create! :name => "Aldric", :pending => false
+    get :index
+    members = assigns[:members]
+    members.size.should == 1
+    assigns[:members].first.name.should == "Aldric"
+  end
+
   it "presents a new member form" do
     get :new
     assigns[:member].should_not be_nil

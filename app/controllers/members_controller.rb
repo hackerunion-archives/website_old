@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
 
   def index
-    @members = Member.all
+    @members = Member.where(:pending => false)
   end
 
   def new
