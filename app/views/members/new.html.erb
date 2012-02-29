@@ -3,4 +3,7 @@
 <%= form_for @member do |member| %>
 Name:
 <%= member.text_field :name %>
+Affiliations:
+<%= text_field_tag :affiliation_list %>
+<%= submit_tag "Request Membership" %>
 <% end %>

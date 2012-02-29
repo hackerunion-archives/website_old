@@ -23,4 +23,32 @@ describe MembersController do
     Member.last.name.should == "Jim"
   end
 
+  it "creates new affiliations for a new member" do
+    post :create, {
+        :member => {:name => "Jim"},
+        :affiliation_list => "Cyrus, Nerf Herders"
+    }
+    response.should render_template("create")
+    member = Member.last
+    affiliation_names = member.affiliations.collect(&:name)
+    affiliation_names.should include("Cyrus")
+    affiliation_names.should include("Nerf Herders")
+  end
+
+  it "reuses existing affiliations when creating new members" do
+    existing_affiliation = Affiliation.create! :name => "Cyrus"
+    post :create, {
+        :member => {:name => "Jim"},
+        :affiliation_list => "Cyrus, Nerf Herders"
+    }
+    response.should render_template("create")
+    member = Member.last
+    member.affiliations.first.should == existing_affiliation
+  end
+
+  it "can create a new member with no affiliations" do
+    post :create, {:member => {:name => "Jim"}}
+    Member.last.affiliations.should == []
+  end
+
 end
