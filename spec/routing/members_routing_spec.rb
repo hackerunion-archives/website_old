@@ -21,7 +21,7 @@ describe MembersController do
     end
 
     it "routes to approve" do
-      get("/members/1/approve").should route_to("members#approve", :id => "1")
+      put("/members/1/approve").should route_to("members#approve", :id => "1")
     end
 
   end

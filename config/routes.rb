@@ -58,7 +58,7 @@ Hackerunion::Application.routes.draw do
 
   resources :members do
     member do
-      get :approve
+      put :approve
     end
     collection do
       get :pending
