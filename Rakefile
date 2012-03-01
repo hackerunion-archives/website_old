@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Hackerunion::Application.load_tasks
+HackerUnion::Application.load_tasks
