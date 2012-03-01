@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
 */
+
+body {
+    font-family: Verdana, sans-serif;
+    background-color: white;
+    color: black;
+}
+
+table th {
+    color: #00c;
+}
