@@ -1,12 +1,12 @@
 <h1>Pending Members</h1>
 
 <table>
-<tr><th>Name</th><th>Affiliations</th></tr>
+<tr>
+  <th>Email</th>
 <% @members.each do |member| %>
 <tr>
-<td><%= member.name %></td>
-<td><%= affiliations_list_for(member) %></td>
-<td><%= link_to "Approve", approve_member_path(member) %></td>
+<td><%= member.email %></td>
+<td><%= button_to "Approve", approve_member_path(member), method: "put" %></td>
 </tr>
 <% end %>
 </table>

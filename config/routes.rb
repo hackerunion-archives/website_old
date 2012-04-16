@@ -1,10 +1,8 @@
 HackerUnion::Application.routes.draw do
 
-  devise_for :users
+  devise_for :members
 
   root :to => "members#index"
-
-  resources :users, :only => :show
 
   resources :members do
     member do

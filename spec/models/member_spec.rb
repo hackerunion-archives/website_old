@@ -2,23 +2,23 @@ require 'spec_helper'
 
 describe Member do
 
-  it "models a member" do
+  it "is pending (not approved) by default" do
     name = "Jim"
-    m = Member.create! :name => name
-    m.name.should == name
-    m.pending.should == true
+    m = FactoryGirl.create :member, name: name
+    m.name.should eq name
+    m.pending.should eq true
   end
 
   it "has many affiliations" do
-    m = Member.create! :name => "Jim"
+    m = FactoryGirl.create :member, name: "Jim"
     a = m.affiliations.build
     a.name = "Cyrus"
     m.save!
-    m.affiliations.first.name.should == "Cyrus"
+    m.affiliations.first.name.should eq "Cyrus"
   end
 
   it "provides a mechanism for approving pending members" do
-    m = Member.create! :name => "Jim"
+    m = FactoryGirl.create :member, :name => "Jim"
     m.approve!
     m.pending.should == false
   end

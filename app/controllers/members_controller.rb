@@ -8,24 +8,20 @@ class MembersController < ApplicationController
     @members = Member.where(:pending => true)
   end
 
-  def new
-    @member = Member.new
-  end
-
-  def create
-    Member.transaction do
-      @member = Member.create! params[:member]
-      affiliation_names = parse_affiliation_list(params[:affiliation_list])
-      affiliation_names.each do |affiliation_name|
-        affiliation = Affiliation.find_or_create_by_name affiliation_name
-        @member.affiliations << affiliation
-      end
-    end
-  end
-
   def approve
     @member = Member.find(params[:id])
     @member.approve!
+  end
+
+  def show
+    @member = Member.find params[:id]
+  end
+
+  def edit
+    @member = Member.find params[:id]
+  end
+
+  def update
   end
 
 private
