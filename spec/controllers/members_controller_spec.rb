@@ -38,6 +38,16 @@ describe MembersController do
     m.pending.should be_false
   end
 
+  it "can add affiliations" do
+    m = FactoryGirl.create :member, name: "Jim"
+    put :update, {id: m,
+                  affiliations: "HackerUnion, CyrusInnovation",
+                  name: "Bob"}
+
+    assigns[:member].affiliations.size.should eq 2
+    assigns[:member].name.should eq "Bob"
+  end
+
   def valid_attributes
     {email: "Iexist@really.com",
      password: "Tryme4size"}
