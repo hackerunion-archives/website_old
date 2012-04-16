@@ -1,6 +1,6 @@
 Hackerunion::Application.routes.draw do
 
-  root :to => "members#index"
+  root :to => "home#index"
 
   resources :members do
     member do
