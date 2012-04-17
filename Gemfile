@@ -1,14 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
-gem 'sqlite3'
 
 gem 'devise'
 gem 'cancan'
 
 gem 'haml'
 gem 'jquery-rails'
-gem "zurb-foundation" #css framework
+gem 'zurb-foundation' #css framework
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -20,8 +19,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'sqlite3'
 end
 
 group :development do
   gem 'haml-rails'
+  gem 'heroku'
 end
