@@ -9,6 +9,11 @@ describe Member do
     m.approved.should be_false
   end
 
+  it "is not an ambassador by default" do
+    m = FactoryGirl.create :member, name: "Jim"
+    m.ambassador.should be_false
+  end
+
   it "has many affiliations" do
     m = FactoryGirl.create :member, name: "Jim"
     a = m.affiliations.build

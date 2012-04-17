@@ -34,6 +34,13 @@ class MembersController < ApplicationController
     redirect_to members_path
   end
 
+  def toggle_ambassador
+    m = Member.find(params[:id])
+    m.ambassador = !m.ambassador?
+    m.save!
+    redirect_to member_path(m.id)
+  end
+
 private
 
   def approved_member?

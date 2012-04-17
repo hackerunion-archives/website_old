@@ -1,3 +1,9 @@
-%h1 Oh look, a user!
-%p Hi #{@member.email}!
+%h2
+  = @member.name || "This user has not entered their name yet."
+  -if @member.ambassador?
+    #ambassador{style: "float: left; margin-right: 10px;"}=image_tag 'dolphin.jpg'
 
+%p
+%p Email: #{@member.email}
+
+=toggle_ambassador_button(@member.id)
