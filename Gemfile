@@ -7,7 +7,7 @@ gem 'cancan'
 
 gem 'haml'
 gem 'jquery-rails'
-gem 'zurb-foundation' #css framework
+gem "twitter-bootstrap-rails"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
