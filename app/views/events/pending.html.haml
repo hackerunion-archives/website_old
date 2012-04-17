@@ -1,19 +1,25 @@
-%h1 Listing Pending events
-
-%table
-  %tr
-    %th Title
-    %th Description
-    %th Start time
-    %th End time
-    %th Submitted By
-    %th
-
-  - @events.each do |event|
+- model_class = Event.new.class
+%h1=t '.title', :default => 'Pending' + model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
     %tr
-      %td= event.title
-      %td= event.description
-      %td= event.start_time
-      %td= event.end_time
-      %td= link_to event.member.email, member_path(event.member)
-      %td= button_to "Approve", approve_event_path(event), method: "put"
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:start_time)
+      %th= model_class.human_attribute_name(:end_time)
+      %th= model_class.human_attribute_name(:approved)
+      %th= model_class.human_attribute_name(:member)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= link_to event.id, event_path(event)
+        %td= event.title
+        %td= event.description
+        %td= event.start_time
+        %td= event.end_time
+        %td= event.approved
+        %td= link_to event.member.email, member_path(event.member)
+        %td
+          = button_to t('.approve', :default => t("helpers.links.approve")), approve_event_path(event), :method => 'put', :class => 'btn btn-mini'
