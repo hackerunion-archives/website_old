@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :authenticate_member!, :only => [:new, :create]
-  before_filter :authenticate_admin!, :only => [:update, :destroy, :pending, :approve]
+
   # GET /events
   # GET /events.json
   def index
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.approved = false
-    @event.member = current_user
+    @event.member = current_member
 
     respond_to do |format|
       if @event.save
@@ -96,6 +96,6 @@ class EventsController < ApplicationController
   def approve
     @event = Event.find(params[:id])
     @event.approve!
-    redirect_to :index
+    redirect_to events_path
   end
 end

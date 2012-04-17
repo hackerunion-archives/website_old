@@ -15,5 +15,5 @@
       %td= event.description
       %td= event.start_time
       %td= event.end_time
-      %td= event.member.name
-      %td= link_to 'Approve', approve_event_path(event)
+      %td= link_to event.member.email, member_path(event.member)
+      %td= button_to "Approve", approve_event_path(event), method: "put"

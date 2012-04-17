@@ -19,7 +19,7 @@
       %td= event.start_time
       %td= event.end_time
       %td= event.approved
-      %td= event.member_id
+      %td= link_to event.member.email, member_path(event.member)
       %td= link_to 'Show', event
       %td= link_to 'Edit', edit_event_path(event)
       %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
