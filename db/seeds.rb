@@ -11,3 +11,12 @@ Member.create name: 'Aldric Giacomoni', approved: true, admin: true,
 
 Member.create name: 'Jason Berry', approved: true, admin: true,
               password: '123123', email: 'jberry@cyrusinnovation.com'
+
+if Rails.env != 'production'
+  Member.create name: 'Pending', approved: false, admin: false,
+                password: '123123', email: 'pending@email.com'
+  Member.create name: 'Approved', approved: true, admin: false,
+                password: '123123', email: 'approved@email.com'
+  Member.create name: 'Admin', approved: true, admin: true,
+                password: '123123', email: 'admin@email.com'
+end
