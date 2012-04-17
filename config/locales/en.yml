@@ -1,4 +1,4 @@
-en-US:
+en:
   date:
     abbr_day_names:
     - Sun
@@ -131,6 +131,17 @@ en-US:
         one: 1 error prohibited this %{model} from being saved
         other: ! '%{count} errors prohibited this %{model} from being saved'
   helpers:
+    titles:
+      edit: Edit %{model}
+      new: New %{model}
+    links:
+      cancel: Cancel
+      edit: Edit
+      destroy: Destroy
+      confirm: Confirm
+      new: New
+      approve: Approve
+      confirm: Are you sure?
     select:
       prompt: Please select
     submit:
