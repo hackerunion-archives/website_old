@@ -1,7 +1,7 @@
 module MembersHelper
 
   def affiliations_list_for member
-    if member.affiliations.nil?
+    unless member.affiliations.nil?
       member.affiliations.collect(&:name).join(", ")
     end
   end
