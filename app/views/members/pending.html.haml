@@ -1,0 +1,8 @@
+%h1 Pending Members
+%table
+  %tr
+    %th Email
+  - @members.each do |member|
+    %tr
+      %td= member.email
+      %td= button_to "Approve", approve_member_path(member), method: "put"

@@ -1,0 +1,20 @@
+!!!HTML
+
+%html
+  %head
+    %title Hacker Union
+    = stylesheet_link_tag    "application", :media => "all" 
+    = javascript_include_tag "application" 
+    = csrf_meta_tags 
+
+  %body
+
+    #authentication_controls= login_or_logout_link
+    #admin_controls= pending_link
+
+    %h1 Hacker Union
+
+    %p.notice= notice
+    %p.alert= alert
+
+    = yield 
