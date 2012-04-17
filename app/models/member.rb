@@ -12,6 +12,8 @@ class Member < ActiveRecord::Base
 
   has_and_belongs_to_many :affiliations
 
+  has_many :events
+
   def approve!
     self.approved = true
     save!
