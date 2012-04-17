@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe MembersController do
+describe ApplicationController do
 
   describe "routing" do
 
     it "routes root to member list" do
-      get("/").should route_to("members#index")
+      get("/").should route_to("home#index")
     end
 
   end

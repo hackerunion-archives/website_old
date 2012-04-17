@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe MembersController do
 
-  it "lists all members" do
+  def valid_attributes
+    {email: "Iexist@really.com",
+     password: "Tryme4size"}
+  end
+
+  it "lists all approved members" do
     m1 = FactoryGirl.create :member, :name => "Jim", :pending => false
     m2 = FactoryGirl.create :member, :name => "Aldric", :pending => false
     get :index
@@ -48,9 +53,31 @@ describe MembersController do
     assigns[:member].name.should eq "Bob"
   end
 
-  def valid_attributes
-    {email: "Iexist@really.com",
-     password: "Tryme4size"}
+  context "Logged in, approved member" do
+
+    before :each do
+      @user = FactoryGirl.create :member, pending: false
+      sign_in @user
+    end
+
+    it "can see the members directory" do
+      get :index
+      response.should_not redirect_to 'home#index'
+    end
+  end
+
+
+  context "Logged in, pending member" do
+
+    before :each do
+      @user = FactoryGirl.create :member, pending: true
+      sign_in @user
+    end
+
+    it "cannot see the members directory" do
+      get :index
+      response.should redirect_to root_path
+    end
   end
 
 end
