@@ -8,8 +8,12 @@ module ApplicationHelper
     end
   end
 
-  def pending_link
+  def pending_members_link
     link_to('Pending Members', pending_members_path) if (current_member && current_member.admin?)
+  end
+
+  def pending_events_link
+    link_to('Pending Events', pending_events_path) if (current_member && current_member.admin?)
   end
 
 end

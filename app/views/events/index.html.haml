@@ -1,0 +1,29 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Title
+    %th Description
+    %th Start time
+    %th End time
+    %th Approved
+    %th Member
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.title
+      %td= event.description
+      %td= event.start_time
+      %td= event.end_time
+      %td= event.approved
+      %td= link_to event.member.email, member_path(event.member)
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Event', new_event_path
