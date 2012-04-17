@@ -1,5 +1,7 @@
 HackerUnion::Application.routes.draw do
 
+  resources :events
+
   devise_for :members
 
   root :to => "home#index"
