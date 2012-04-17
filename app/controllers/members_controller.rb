@@ -1,5 +1,8 @@
 class MembersController < ApplicationController
 
+  before_filter :authenticate_member!, :only => [:index]
+  before_filter :approved_member?, :except => [:pending, :approve]
+
   def index
     @members = Member.where(:pending => false)
   end
@@ -32,6 +35,10 @@ class MembersController < ApplicationController
   end
 
 private
+
+  def approved_member?
+    redirect_to root_path unless !current_member.pending?
+  end
 
   def parse_affiliation_list affiliations
     affiliations ||= ""
