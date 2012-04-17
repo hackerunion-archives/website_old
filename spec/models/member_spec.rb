@@ -6,7 +6,7 @@ describe Member do
     name = "Jim"
     m = FactoryGirl.create :member, name: name
     m.name.should eq name
-    m.pending.should eq true
+    m.approved.should be_false
   end
 
   it "has many affiliations" do
@@ -18,9 +18,9 @@ describe Member do
   end
 
   it "provides a mechanism for approving pending members" do
-    m = FactoryGirl.create :member, :name => "Jim"
+    m = FactoryGirl.create :member, name: "Jim"
     m.approve!
-    m.pending.should == false
+    m.approved.should be_true
   end
 
 end

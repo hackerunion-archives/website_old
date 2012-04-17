@@ -1,14 +1,14 @@
 class MembersController < ApplicationController
 
   before_filter :authenticate_member!, :only => [:index]
-  before_filter :approved_member?, :except => [:pending, :approve]
+  load_and_authorize_resource
 
   def index
-    @members = Member.where(:pending => false)
+    @members = Member.where(:approved => true)
   end
 
   def pending
-    @members = Member.where(:pending => true)
+    @members = Member.where(:approved => false)
   end
 
   def approve
@@ -37,7 +37,7 @@ class MembersController < ApplicationController
 private
 
   def approved_member?
-    redirect_to root_path unless !current_member.pending?
+    redirect_to root_path unless current_member.approved?
   end
 
   def parse_affiliation_list affiliations

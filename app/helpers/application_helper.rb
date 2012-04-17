@@ -8,4 +8,8 @@ module ApplicationHelper
     end
   end
 
+  def pending_link
+    link_to('Pending Members', pending_members_path) if (current_member && current_member.admin?)
+  end
+
 end

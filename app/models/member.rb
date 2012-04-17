@@ -8,12 +8,12 @@ class Member < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :name, :affiliation_list,
-                  :pending, :admin
+                  :approved, :admin
 
   has_and_belongs_to_many :affiliations
 
   def approve!
-    self.pending = false
+    self.approved = true
     save!
   end
 

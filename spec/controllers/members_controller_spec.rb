@@ -7,37 +7,35 @@ describe MembersController do
      password: "Tryme4size"}
   end
 
-  it "excludes pending members from member list" do
-    m1 = FactoryGirl.create :member, :name => "Jim"
-    m2 = FactoryGirl.create :member, :name => "Aldric", :pending => false
-    get :pending
-    members = assigns[:members]
-    members.size.should == 1
-    assigns[:members].first.name.should == "Jim"
-    response.should render_template("pending")
-  end
+  context "Logged in administrator" do
 
-  it "lists pending members" do
-    m1 = FactoryGirl.create :member, :name => "Jim"
-    m2 = FactoryGirl.create :member, :name => "Aldric", :pending => false
-    get :pending
-    members = assigns[:members]
-    members.size.should == 1
-    assigns[:members].first.name.should == "Jim"
-  end
+    before :each do
+      @user = FactoryGirl.create :member, admin: true, approved: true
+      sign_in @user
+    end
 
-  it "can approve a pending member" do
-    m = FactoryGirl.create :member, name: "Jim"
-    put :approve, {id: m}
-    assigns[:member].name.should eq "Jim"
-    m.reload
-    m.pending.should be_false
+    it "lists pending members" do
+      m1 = FactoryGirl.create :member, :name => "Jim"
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      get :pending
+      members = assigns[:members]
+      members.size.should eq 1
+      assigns[:members].first.name.should eq "Jim"
+    end
+
+    it "can approve a pending member" do
+      m = FactoryGirl.create :member, name: "Jim"
+      put :approve, {id: m}
+      assigns[:member].name.should eq "Jim"
+      m.reload
+      m.approved.should be_true
+    end
   end
 
   context "Logged in, approved member" do
 
     before :each do
-      @user = FactoryGirl.create :member, pending: false
+      @user = FactoryGirl.create :member, approved: true
       sign_in @user
     end
 
@@ -47,21 +45,31 @@ describe MembersController do
     end
 
     it "lists all approved members" do
-      m1 = FactoryGirl.create :member, :name => "Jim", :pending => false
-      m2 = FactoryGirl.create :member, :name => "Aldric", :pending => false
+      m1 = FactoryGirl.create :member, :name => "Jim", approved: true
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
       get :index
       assigns(:members).map(&:name).sort.should eq ['Test User', 'Jim', 'Aldric'].sort
       response.should render_template("index")
     end
 
-    it "can add affiliations" do
-      m = FactoryGirl.create :member, name: "Jim"
-      put :update, {id: m,
+    it "can add affiliations to himself" do
+      #m = FactoryGirl.create :member, name: "Jim", approved: true
+      put :update, {id: @user.id,
                     affiliations: "HackerUnion, CyrusInnovation",
                     name: "Bob"}
+      @user.reload
+      @user.name.should eq 'Bob'
+      @user.affiliations.size.should eq 2
+    end
 
-      assigns[:member].affiliations.size.should eq 2
-      assigns[:member].name.should eq "Bob"
+    it "excludes pending members from member list" do
+      m1 = FactoryGirl.create :member, :name => "Jim"
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      get :index
+      members = assigns[:members]
+      members.size.should eq 2
+      members.last.name.should eq "Aldric"
+      response.should render_template("index")
     end
 
   end
@@ -69,7 +77,7 @@ describe MembersController do
   context "Logged in, pending member" do
 
     before :each do
-      @user = FactoryGirl.create :member, pending: true
+      @user = FactoryGirl.create :member, approved: false
       sign_in @user
     end
 
@@ -86,6 +94,5 @@ describe MembersController do
       response.should redirect_to new_member_session_path
     end
   end
-
 
 end
