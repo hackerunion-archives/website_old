@@ -5,7 +5,7 @@ describe "events/show" do
     @event = assign(:event, stub_model(Event,
       :title => "Title",
       :description => "Description",
-      :pending => "",
+      :approved => "",
       :member_id => 1
     ))
   end

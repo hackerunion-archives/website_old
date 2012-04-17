@@ -6,13 +6,13 @@ describe "events/index" do
       stub_model(Event,
         :title => "Title",
         :description => "Description",
-        :pending => "",
+        :approved => "",
         :member_id => 1
       ),
       stub_model(Event,
         :title => "Title",
         :description => "Description",
-        :pending => "",
+        :approved => "",
         :member_id => 1
       )
     ])

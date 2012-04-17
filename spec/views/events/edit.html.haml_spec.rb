@@ -5,7 +5,7 @@ describe "events/edit" do
     @event = assign(:event, stub_model(Event,
       :title => "MyString",
       :description => "MyString",
-      :pending => "",
+      :approved => "",
       :member_id => 1
     ))
   end
@@ -17,7 +17,7 @@ describe "events/edit" do
     assert_select "form", :action => events_path(@event), :method => "post" do
       assert_select "input#event_title", :name => "event[title]"
       assert_select "input#event_description", :name => "event[description]"
-      assert_select "input#event_pending", :name => "event[pending]"
+      assert_select "input#event_approved", :name => "event[approved]"
       assert_select "input#event_member_id", :name => "event[member_id]"
     end
   end

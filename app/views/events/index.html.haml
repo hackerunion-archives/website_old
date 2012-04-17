@@ -6,7 +6,7 @@
     %th Description
     %th Start time
     %th End time
-    %th Pending
+    %th Approved
     %th Member
     %th
     %th
@@ -18,7 +18,7 @@
       %td= event.description
       %td= event.start_time
       %td= event.end_time
-      %td= event.pending
+      %td= event.approved
       %td= event.member_id
       %td= link_to 'Show', event
       %td= link_to 'Edit', edit_event_path(event)
