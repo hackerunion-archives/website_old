@@ -30,6 +30,15 @@ describe MembersController do
       m.reload
       m.approved.should be_true
     end
+
+    it "can change a member's ambassador status" do
+      m = FactoryGirl.create :member, name: 'Jason', ambassador: false
+      put :toggle_ambassador, id: m.id
+      m.reload
+      m.ambassador.should be_true
+      response.should redirect_to member_path(m.id)
+    end
+
   end
 
   context "Logged in, approved member" do
@@ -72,6 +81,14 @@ describe MembersController do
       response.should render_template("index")
     end
 
+    it "cannot change a member's ambassador status" do
+      m = FactoryGirl.create :member, name: 'Jason', ambassador: false
+      put :toggle_ambassador, id: m.id
+      m.reload
+      m.ambassador.should be_false
+      response.should redirect_to root_path
+    end
+
   end
 
   context "Logged in, pending member" do
@@ -87,12 +104,29 @@ describe MembersController do
     end
   end
 
+  it "cannot change a member's ambassador status" do
+    m = FactoryGirl.create :member, name: 'Jason', ambassador: false
+    put :toggle_ambassador, id: m.id
+    m.reload
+    m.ambassador.should be_false
+    response.should redirect_to root_path
+  end
+
   context "Logged out" do
 
     it "cannot see the members directory" do
       get :index
       response.should redirect_to new_member_session_path
     end
+
+    it "cannot change a member's ambassador status" do
+      m = FactoryGirl.create :member, name: 'Jason', ambassador: false
+      put :toggle_ambassador, id: m.id
+      m.reload
+      m.ambassador.should be_false
+      response.should redirect_to root_path
+    end
+
   end
 
 end

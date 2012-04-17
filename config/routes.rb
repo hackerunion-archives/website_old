@@ -16,6 +16,7 @@ HackerUnion::Application.routes.draw do
   resources :members do
     member do
       put :approve
+      put :toggle_ambassador
     end
     collection do
       get :pending

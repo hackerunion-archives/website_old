@@ -20,6 +20,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'sqlite3'
+  gem 'mocha'
 end
 
 group :development do

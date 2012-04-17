@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417174447) do
+ActiveRecord::Schema.define(:version => 20120417174613) do
 
   create_table "affiliations", :force => true do |t|
     t.string "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20120417174447) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false
+    t.boolean  "ambassador",             :default => false
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true

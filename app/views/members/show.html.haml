@@ -4,7 +4,7 @@
 %p
   %strong= model_class.human_attribute_name(:name) + ':'
   %br
-  = @member.name
+  = @member.name || "This user has not entered their name yet."
 %p
   %strong= model_class.human_attribute_name(:email) + ':'
   %br
@@ -12,4 +12,9 @@
 %p
   %strong= model_class.human_attribute_name(:affiliations) + ':'
   %br
-  = affiliations_list_for(@member)
+  = affiliations_list_for(@member) || "This user has no affiliations yet."
+%p
+  %strong= model_class.human_attribute_name(:ambassador) + ':'
+  -if @member.ambassador?
+    #ambassador{style: "float: left; margin-right: 10px;"}=image_tag 'dolphin.jpg'
+  =toggle_ambassador_button(@member.id)

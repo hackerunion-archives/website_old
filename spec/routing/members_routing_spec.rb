@@ -16,6 +16,10 @@ describe MembersController do
       put("/members/1/approve").should route_to("members#approve", id: "1")
     end
 
+    it "routes to ambassador" do
+      put("/members/1/toggle_ambassador").should route_to("members#toggle_ambassador", id: "1")
+    end
+
     it "routes to edit" do
       get("/members/1/edit").should route_to("members#edit", id: "1")
     end
