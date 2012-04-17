@@ -1,5 +1,5 @@
 - model_class = Event.new.class
-%h1=t '.title', :default => 'Pending' + model_class.model_name.human.pluralize
+%h1=t '.pending-title', :default => 'Pending ' + model_class.model_name.human.pluralize
 %table.table.table-striped
   %thead
     %tr
@@ -21,5 +21,4 @@
         %td= event.end_time
         %td= event.approved
         %td= link_to event.member.email, member_path(event.member)
-        %td
-          = button_to t('.approve', :default => t("helpers.links.approve")), approve_event_path(event), :method => 'put', :class => 'btn btn-mini'
+        %td= button_to t('.approve', :default => t("helpers.links.approve")), approve_event_path(event), :method => 'put', :class => 'btn btn-mini'

@@ -1,12 +1,14 @@
-%h1 Hi We're editing you
-
-=form_for @member do
-  .span4
-    =label_tag :name
-    =label_tag :affiliations
-  %br
-  .span4
-    =text_field_tag :name, @member.name
-    =text_field_tag :affiliations, affiliations_list_for(@member)
-  %br
-  =submit_tag :submit
+- model_class = @member.class
+%h1=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human, :default => "Edit #{model_class.model_name.human}")
+= form_for @member, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :affiliations, :class => 'control-label'
+    .controls
+      = f.text_field :affiliations, affiliations_list_for(@member), :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), members_path, :class => 'btn'

@@ -1,3 +1,15 @@
-%h1 Oh look, a user!
-%p Hi #{@member.email}!
+- model_class = @member.class
+%h1=t '.title', :default => model_class.model_name.human
 
+%p
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
+  = @member.name
+%p
+  %strong= model_class.human_attribute_name(:email) + ':'
+  %br
+  = @member.email
+%p
+  %strong= model_class.human_attribute_name(:affiliations) + ':'
+  %br
+  = affiliations_list_for(@member)

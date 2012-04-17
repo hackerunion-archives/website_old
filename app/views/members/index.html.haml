@@ -1,2 +1,16 @@
-%h1 Members
-= render :partial => 'member_list'
+- model_class = Member.new.class
+%h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:email)
+      %th= model_class.human_attribute_name(:affiliations)
+  %tbody
+    - @members.each do |member|
+      %tr
+        %td= link_to member.id, member_path(member)
+        %td= member.name
+        %td= member.email
+        %td= affiliations_list_for(member)

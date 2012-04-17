@@ -1,8 +1,18 @@
-%h1 Pending Members
-%table
-  %tr
-    %th Email
-  - @members.each do |member|
+- model_class = Member.new.class
+%h1=t '.pending-title', :default => 'Pending ' + model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
     %tr
-      %td= member.email
-      %td= button_to "Approve", approve_member_path(member), method: "put"
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:email)
+      %th= model_class.human_attribute_name(:affiliations)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @members.each do |member|
+      %tr
+        %td= link_to member.id, member_path(member)
+        %td= member.name
+        %td= member.email
+        %td= affiliations_list_for(member)
+        %td= button_to t('.approve', :default => t("helpers.links.approve")), approve_member_path(member), :method => 'put', :class => 'btn btn-mini'
