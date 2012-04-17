@@ -1,8 +1,10 @@
 class EventsController < ApplicationController
+  before_filter :authenticate_member!, :only => [:new, :create]
+  before_filter :authenticate_admin!, :only => [:update, :destroy, :pending, :approve]
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.find_all_by_approved(true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +44,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.approved = false
+    @event.member = current_user
 
     respond_to do |format|
       if @event.save
@@ -79,6 +82,23 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
+    end
+  end
+
+  def pending
+    @events = Event.find_all_by_approved(false)
+    respond_to do |format|
+      format.html
+      format.json { render json: @events }
+    end
+  end
+
+  def approve
+    @event = Event.find(params[:id])
+    @event.approve!
+    respond_to do |format|
+      format.html
+      format.json { render json: @event }
     end
   end
 end
