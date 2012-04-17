@@ -82,6 +82,7 @@ GEM
     multi_json (1.1.0)
     netrc (0.7.1)
     orm_adapter (0.0.6)
+    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -162,6 +163,7 @@ DEPENDENCIES
   haml-rails
   heroku
   jquery-rails
+  pg
   rails (= 3.2.1)
   rspec-rails
   sass-rails (~> 3.2.3)
