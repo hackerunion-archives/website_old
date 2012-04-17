@@ -22,3 +22,7 @@ body {
 table th {
     color: #00c;
 }
+
+#authentication_controls {
+    float: right;
+}

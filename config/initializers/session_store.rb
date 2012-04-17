@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-Hackerunion::Application.config.session_store :cookie_store, key: '_hackerunion_session'
+HackerUnion::Application.config.session_store :cookie_store, key: '_hackerunion_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-# Hackerunion::Application.config.session_store :active_record_store
+# HackerUnion::Application.config.session_store :active_record_store

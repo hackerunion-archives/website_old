@@ -2,80 +2,97 @@ require 'spec_helper'
 
 describe MembersController do
 
-  it "lists all members" do
-    m1 = Member.create! :name => "Jim", :pending => false
-    m2 = Member.create! :name => "Aldric", :pending => false
-    get :index
-    assigns[:members].first.name.should == "Jim"
-    assigns[:members].last.name.should == "Aldric"
-    response.should render_template("index")
+  def valid_attributes
+    {email: "Iexist@really.com",
+     password: "Tryme4size"}
   end
 
-  it "excludes pending members from member list" do
-    m1 = Member.create! :name => "Jim"
-    m2 = Member.create! :name => "Aldric", :pending => false
-    get :pending
-    members = assigns[:members]
-    members.size.should == 1
-    assigns[:members].first.name.should == "Jim"
-    response.should render_template("pending")
+  context "Logged in administrator" do
+
+    before :each do
+      @user = FactoryGirl.create :member, admin: true, approved: true
+      sign_in @user
+    end
+
+    it "lists pending members" do
+      m1 = FactoryGirl.create :member, :name => "Jim"
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      get :pending
+      members = assigns[:members]
+      members.size.should eq 1
+      assigns[:members].first.name.should eq "Jim"
+    end
+
+    it "can approve a pending member" do
+      m = FactoryGirl.create :member, name: "Jim"
+      put :approve, {id: m}
+      assigns[:member].name.should eq "Jim"
+      m.reload
+      m.approved.should be_true
+    end
   end
 
-  it "lists pending members" do
-    m1 = Member.create! :name => "Jim"
-    m2 = Member.create! :name => "Aldric", :pending => false
-    get :pending
-    members = assigns[:members]
-    members.size.should == 1
-    assigns[:members].first.name.should == "Jim"
+  context "Logged in, approved member" do
+
+    before :each do
+      @user = FactoryGirl.create :member, approved: true
+      sign_in @user
+    end
+
+    it "can see the members directory" do
+      get :index
+      response.should_not redirect_to 'home#index'
+    end
+
+    it "lists all approved members" do
+      m1 = FactoryGirl.create :member, :name => "Jim", approved: true
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      get :index
+      assigns(:members).map(&:name).sort.should eq ['Test User', 'Jim', 'Aldric'].sort
+      response.should render_template("index")
+    end
+
+    it "can add affiliations to himself" do
+      #m = FactoryGirl.create :member, name: "Jim", approved: true
+      put :update, {id: @user.id,
+                    affiliations: "HackerUnion, CyrusInnovation",
+                    name: "Bob"}
+      @user.reload
+      @user.name.should eq 'Bob'
+      @user.affiliations.size.should eq 2
+    end
+
+    it "excludes pending members from member list" do
+      m1 = FactoryGirl.create :member, :name => "Jim"
+      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      get :index
+      members = assigns[:members]
+      members.size.should eq 2
+      members.last.name.should eq "Aldric"
+      response.should render_template("index")
+    end
+
   end
 
-  it "presents a new member form" do
-    get :new
-    assigns[:member].should_not be_nil
-    response.should render_template("new")
+  context "Logged in, pending member" do
+
+    before :each do
+      @user = FactoryGirl.create :member, approved: false
+      sign_in @user
+    end
+
+    it "cannot see the members directory" do
+      get :index
+      response.should redirect_to root_path
+    end
   end
 
-  it "creates a new member" do
-    post :create, {:member => {:name => "Jim"}}
-    response.should render_template("create")
-    Member.last.name.should == "Jim"
-  end
+  context "Logged out" do
 
-  it "creates new affiliations for a new member" do
-    post :create, {
-        :member => {:name => "Jim"},
-        :affiliation_list => "Cyrus, Nerf Herders"
-    }
-    response.should render_template("create")
-    member = Member.last
-    affiliation_names = member.affiliations.collect(&:name)
-    affiliation_names.should include("Cyrus")
-    affiliation_names.should include("Nerf Herders")
-  end
-
-  it "reuses existing affiliations when creating new members" do
-    existing_affiliation = Affiliation.create! :name => "Cyrus"
-    post :create, {
-        :member => {:name => "Jim"},
-        :affiliation_list => "Cyrus, Nerf Herders"
-    }
-    response.should render_template("create")
-    member = Member.last
-    member.affiliations.first.should == existing_affiliation
-  end
-
-  it "can create a new member with no affiliations" do
-    post :create, {:member => {:name => "Jim"}}
-    Member.last.affiliations.should == []
-  end
-
-  it "can approve a pending member" do
-    m = Member.create! :name => "Jim"
-    put :approve, {:id => m}
-    assigns[:member].name.should == "Jim"
-    m.reload
-    m.pending.should == false
+    it "cannot see the members directory" do
+      get :index
+      response.should redirect_to new_member_session_path
+    end
   end
 
 end
