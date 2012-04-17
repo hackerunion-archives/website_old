@@ -1,0 +1,19 @@
+%h1 Listing Pending events
+
+%table
+  %tr
+    %th Title
+    %th Description
+    %th Start time
+    %th End time
+    %th Submitted By
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.title
+      %td= event.description
+      %td= event.start_time
+      %td= event.end_time
+      %td= event.member.name
+      %td= link_to 'Approve', approve_event_path(event)

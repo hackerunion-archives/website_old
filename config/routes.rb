@@ -1,6 +1,13 @@
 HackerUnion::Application.routes.draw do
 
-  resources :events
+  resources :events do
+    member do
+      put :approve
+    end
+    collection do
+      get :pending
+    end
+  end
 
   devise_for :members
 

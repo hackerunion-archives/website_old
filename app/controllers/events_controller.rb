@@ -96,9 +96,6 @@ class EventsController < ApplicationController
   def approve
     @event = Event.find(params[:id])
     @event.approve!
-    respond_to do |format|
-      format.html
-      format.json { render json: @event }
-    end
+    redirect_to :index
   end
 end
