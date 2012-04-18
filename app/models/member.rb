@@ -14,6 +14,7 @@ class Member < ActiveRecord::Base
   has_many :events
 
   ransackable_associations :affiliations
+  ransackable_attributes :ambassador
 
   def approve!
     self.approved = true

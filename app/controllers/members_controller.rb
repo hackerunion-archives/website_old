@@ -5,7 +5,9 @@ class MembersController < ApplicationController
 
   def index
     @q = Member.search params[:q]
-
+    if params[:ambassador] == '0' # Find out if checkbox is checked
+      @q = @q.result.search(:ambassador_eq => true)
+    end
     @members = @q.result.where(:approved => true)
   end
 

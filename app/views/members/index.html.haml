@@ -2,21 +2,22 @@
 %h1=t '.title', :default => model_class.model_name.human.pluralize
 
 = search_form_for @q do |f|
-  = f.label 'Affiliation like:'
-  = f.text_field :affiliations_name_cont
-  = f.submit
+  .span6
+    .control-group
+      .control-label
+        = f.label 'Affiliation like:'
+    .controls
+      .text_field
+        = f.text_field :affiliations_name_cont
+  .span6
+    .control-group
+      .control-label
+        = f.label 'Ambassadors only?'
+    .controls
+      .check_box
+        = check_box_tag :ambassador, '0', params[:ambassador] == '0'
+  .form-actions
+    .btn.btn-primary
+      = f.submit
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:email)
-      %th= model_class.human_attribute_name(:affiliations)
-  %tbody
-    - @members.each do |member|
-      %tr
-        %td= link_to member.id, member_path(member)
-        %td= member.name
-        %td= member.email
-        %td= affiliations_list_for(member)
+= render 'member_list'

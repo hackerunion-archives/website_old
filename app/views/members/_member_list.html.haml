@@ -1,15 +1,19 @@
-%table
-  %tr
-    %th Name
-    %th Affiliations
-    %th Ambassadorness
-    %th
-  - @members.each do |member|
+%table.table.table-striped
+  %thead
     %tr
-      %td= member.name
-      %td= affiliations_list_for(member)
-      %td= image_tag 'dolphin.jpg' if member.ambassador?
-      %td
-        = link_to "view", member_path(member.id)
-        \/
-        = link_to "edit", edit_member_path(member.id)
+      %th Name
+      %th Affiliations
+      %th Ambassadorness
+      %th Email
+      %th
+  %tbody
+    - @members.each do |member|
+      %tr
+        %td= link_to member.name, member_path(member)
+        %td= affiliations_list_for(member)
+        %td= image_tag 'dolphin.jpg' if member.ambassador?
+        %td= member.email
+        %td
+          = link_to "view", member_path(member.id)
+          \/
+          = link_to "edit", edit_member_path(member.id)
