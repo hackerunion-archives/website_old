@@ -10,6 +10,7 @@ class Member < ActiveRecord::Base
                   :remember_me, :name, :approved, :admin
 
   has_and_belongs_to_many :affiliations
+
   has_and_belongs_to_many :skills
   has_many :events
 
