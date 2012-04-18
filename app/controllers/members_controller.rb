@@ -32,12 +32,19 @@ class MembersController < ApplicationController
     @member = Member.find params[:id]
 
     @member.name = params[:name]
+
     parse_affiliation_list(params[:affiliations]).each do |a|
-      @member.affiliations << Affiliation.find_or_create_by_name(a)
+      affiliation = Affiliation.find_or_create_by_name a
+      next if @member.affiliations.include? affiliation
+      @member.affiliations << affiliation
     end
+
     parse_skill_list(params[:skills]).each do |s|
-      @member.skills << Skill.find_or_create_by_name(s)
+      skill = Skill.find_or_create_by_name(s)
+      next if @member.skills.include? skill
+      @member.skills << skill
     end
+
     @member.save!
     redirect_to members_path
   end

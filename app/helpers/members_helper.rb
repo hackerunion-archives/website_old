@@ -2,10 +2,6 @@ module MembersHelper
 
   def affiliations_list_for member
     unless member.affiliations.nil?
-      Rails.logger.info "---------------------------------"
-      Rails.logger.info member.email
-      Rails.logger.info member.affiliations.inspect
-      Rails.logger.info "---------------------------------"
       member.affiliations.collect(&:name).join(", ")
     end
   end
