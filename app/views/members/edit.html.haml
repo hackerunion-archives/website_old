@@ -14,6 +14,12 @@
     .controls
       .text_field
         = text_field_tag :affiliations, affiliations_list_for(@member)
+  .control-group
+    .control-label
+      = label_tag :skills
+    .controls
+      .text_field
+        = text_field_tag :skills, skills_list_for(@member)
   .form-actions
     .btn.btn-primary
       = f.submit nil

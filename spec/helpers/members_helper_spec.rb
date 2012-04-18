@@ -31,4 +31,14 @@ describe MembersHelper do
     helper.toggle_ambassador_button(m.id).should be_nil
   end
 
+  it "creates a commalist of skill names" do
+    m = Member.new :name => "Jim"
+    a1 = m.skills.build
+    a1.name = 'Rails'
+    a2 = m.skills.build
+    a2.name = 'Karate Do'
+
+    helper.skills_list_for(m).should eq 'Rails, Karate Do'
+  end
+
 end

@@ -3,6 +3,7 @@
     %tr
       %th Name
       %th Affiliations
+      %th Skills
       %th Ambassadorness
       %th Email
       %th
@@ -11,6 +12,7 @@
       %tr
         %td= link_to member.name, member_path(member)
         %td= affiliations_list_for(member)
+        %td= skills_list_for(member)
         %td= image_tag 'dolphin.jpg' if member.ambassador?
         %td= member.email
         %td

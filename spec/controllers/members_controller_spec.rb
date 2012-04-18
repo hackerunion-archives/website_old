@@ -61,8 +61,7 @@ describe MembersController do
       response.should render_template("index")
     end
 
-    it 'can add affiliations to himself' do
-      #m = FactoryGirl.create :member, name: "Jim", approved: true
+    it 'can add affiliations for himself' do
       put :update, {id: @user.id,
                     affiliations: "HackerUnion, CyrusInnovation",
                     name: "Bob"}
@@ -71,9 +70,16 @@ describe MembersController do
       @user.affiliations.size.should eq 2
     end
 
+    it 'can edit his own skills' do
+      put :update, {id: @user.id,
+                    skills: 'Rails, Karate'}
+      @user.reload
+      @user.skills.map(&:name).sort.should eq %w(Karate Rails).sort
+    end
+
     it 'excludes pending members from member list' do
-      m1 = FactoryGirl.create :member, :name => "Jim"
-      m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
+      m1 = FactoryGirl.create :member, name: "Jim"
+      m2 = FactoryGirl.create :member, name: "Aldric", approved: true
       get :index
       members = assigns[:members]
       members.size.should eq 2

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417174613) do
+ActiveRecord::Schema.define(:version => 20120418172143) do
 
   create_table "affiliations", :force => true do |t|
     t.string "name"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(:version => 20120417174613) do
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "members_skills", :id => false, :force => true do |t|
+    t.integer "member_id"
+    t.integer "skill_id"
+  end
+
+  add_index "members_skills", ["member_id", "skill_id"], :name => "index_members_skills_on_member_id_and_skill_id"
 
   create_table "skills", :force => true do |t|
     t.string "name"

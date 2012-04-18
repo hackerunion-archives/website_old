@@ -6,13 +6,13 @@ class MembersController < ApplicationController
   def index
     @q = Member.search params[:q]
     if params[:ambassador] == '0' # Find out if checkbox is checked
-      @q = @q.result.search(:ambassador_eq => true)
+      @q = @q.result.search(ambassador_eq: true)
     end
-    @members = @q.result.where(:approved => true)
+    @members = @q.result(distinct: true).where(approved: true)
   end
 
   def pending
-    @members = Member.where(:approved => false)
+    @members = Member.where(approved: false)
   end
 
   def approve
@@ -30,9 +30,13 @@ class MembersController < ApplicationController
 
   def update
     @member = Member.find params[:id]
-    @member.update_attribute(:name, params[:name])
+    @member.name = params[:name]
+
     parse_affiliation_list(params[:affiliations]).each do |a|
       @member.affiliations << Affiliation.find_or_create_by_name(a)
+    end
+    parse_skill_list(params[:skills]).each do |s|
+      @member.skills << Skill.find_or_create_by_name(s)
     end
     @member.save!
     redirect_to members_path
@@ -52,8 +56,13 @@ private
   end
 
   def parse_affiliation_list affiliations
-    affiliations ||= ""
+    affiliations ||= ''
     affiliations.split(/\s*,\s*/)
+  end
+
+  def parse_skill_list skills
+    skills ||= ''
+    skills.split(/\s*,\s*/)
   end
 
 end

@@ -7,14 +7,14 @@ class Member < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,
-                  :remember_me, :name, :affiliation_list,
-                  :approved, :admin
+                  :remember_me, :name, :approved, :admin
 
   has_and_belongs_to_many :affiliations
+  has_and_belongs_to_many :skills
   has_many :events
 
   ransackable_associations :affiliations
-  ransackable_attributes :ambassador
+  ransackable_associations :skills
 
   def approve!
     self.approved = true

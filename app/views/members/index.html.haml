@@ -1,23 +1,6 @@
 - model_class = Member.new.class
 %h1=t '.title', :default => model_class.model_name.human.pluralize
 
-= search_form_for @q do |f|
-  .span6
-    .control-group
-      .control-label
-        = f.label 'Affiliation like:'
-    .controls
-      .text_field
-        = f.text_field :affiliations_name_cont
-  .span6
-    .control-group
-      .control-label
-        = f.label 'Ambassadors only?'
-    .controls
-      .check_box
-        = check_box_tag :ambassador, '0', params[:ambassador] == '0'
-  .form-actions
-    .btn.btn-primary
-      = f.submit
+=render 'search'
 
-= render 'member_list'
+=render 'member_list'
