@@ -30,8 +30,8 @@ class MembersController < ApplicationController
 
   def update
     @member = Member.find params[:id]
-    @member.name = params[:name]
 
+    @member.name = params[:name]
     parse_affiliation_list(params[:affiliations]).each do |a|
       @member.affiliations << Affiliation.find_or_create_by_name(a)
     end

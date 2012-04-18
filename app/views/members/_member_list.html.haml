@@ -6,7 +6,6 @@
       %th Skills
       %th Ambassadorness
       %th Email
-      %th
   %tbody
     - @members.each do |member|
       %tr
@@ -15,7 +14,3 @@
         %td= skills_list_for(member)
         %td= image_tag 'dolphin.jpg' if member.ambassador?
         %td= member.email
-        %td
-          = link_to "view", member_path(member.id)
-          \/
-          = link_to "edit", edit_member_path(member.id)
