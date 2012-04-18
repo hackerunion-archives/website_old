@@ -14,7 +14,7 @@ describe MembersController do
       sign_in @user
     end
 
-    it "lists pending members" do
+    it 'lists pending members' do
       m1 = FactoryGirl.create :member, :name => "Jim"
       m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
       get :pending
@@ -23,7 +23,7 @@ describe MembersController do
       assigns[:members].first.name.should eq "Jim"
     end
 
-    it "can approve a pending member" do
+    it 'can approve a pending member' do
       m = FactoryGirl.create :member, name: "Jim"
       put :approve, {id: m}
       assigns[:member].name.should eq "Jim"
@@ -31,7 +31,7 @@ describe MembersController do
       m.approved.should be_true
     end
 
-    it "can change a member's ambassador status" do
+    it 'can change a members ambassador status' do
       m = FactoryGirl.create :member, name: 'Jason', ambassador: false
       put :toggle_ambassador, id: m.id
       m.reload
@@ -48,12 +48,12 @@ describe MembersController do
       sign_in @user
     end
 
-    it "can see the members directory" do
+    it 'can see the members directory' do
       get :index
       response.should_not redirect_to 'home#index'
     end
 
-    it "lists all approved members" do
+    it 'lists all approved members' do
       m1 = FactoryGirl.create :member, :name => "Jim", approved: true
       m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
       get :index
@@ -61,7 +61,7 @@ describe MembersController do
       response.should render_template("index")
     end
 
-    it "can add affiliations to himself" do
+    it 'can add affiliations to himself' do
       #m = FactoryGirl.create :member, name: "Jim", approved: true
       put :update, {id: @user.id,
                     affiliations: "HackerUnion, CyrusInnovation",
@@ -71,7 +71,7 @@ describe MembersController do
       @user.affiliations.size.should eq 2
     end
 
-    it "excludes pending members from member list" do
+    it 'excludes pending members from member list' do
       m1 = FactoryGirl.create :member, :name => "Jim"
       m2 = FactoryGirl.create :member, :name => "Aldric", approved: true
       get :index
@@ -81,7 +81,7 @@ describe MembersController do
       response.should render_template("index")
     end
 
-    it "cannot change a member's ambassador status" do
+    it 'cannot change a members ambassador status' do
       m = FactoryGirl.create :member, name: 'Jason', ambassador: false
       put :toggle_ambassador, id: m.id
       m.reload
@@ -98,13 +98,13 @@ describe MembersController do
       sign_in @user
     end
 
-    it "cannot see the members directory" do
+    it 'cannot see the members directory' do
       get :index
       response.should redirect_to root_path
     end
   end
 
-  it "cannot change a member's ambassador status" do
+  it 'cannot change a members ambassador status' do
     m = FactoryGirl.create :member, name: 'Jason', ambassador: false
     put :toggle_ambassador, id: m.id
     m.reload
@@ -114,12 +114,12 @@ describe MembersController do
 
   context "Logged out" do
 
-    it "cannot see the members directory" do
+    it 'cannot see the members directory' do
       get :index
       response.should redirect_to new_member_session_path
     end
 
-    it "cannot change a member's ambassador status" do
+    it 'cannot change a members ambassador status' do
       m = FactoryGirl.create :member, name: 'Jason', ambassador: false
       put :toggle_ambassador, id: m.id
       m.reload

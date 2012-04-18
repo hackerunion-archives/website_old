@@ -94,6 +94,8 @@ GEM
     netrc (0.7.1)
     orm_adapter (0.0.6)
     pg (0.13.2)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -118,6 +120,10 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
+    ransack (0.6.0)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     rest-client (1.6.7)
@@ -180,6 +186,7 @@ DEPENDENCIES
   mocha
   pg
   rails (= 3.2.1)
+  ransack
   rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3

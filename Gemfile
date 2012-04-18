@@ -5,9 +5,11 @@ gem 'pg'
 gem 'devise'
 gem 'cancan'
 
+gem 'ransack'
+
 gem 'haml'
 gem 'jquery-rails'
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

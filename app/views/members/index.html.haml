@@ -1,5 +1,11 @@
 - model_class = Member.new.class
 %h1=t '.title', :default => model_class.model_name.human.pluralize
+
+= search_form_for @q do |f|
+  = f.label 'Affiliation like:'
+  = f.text_field :affiliations_name_cont
+  = f.submit
+
 %table.table.table-striped
   %thead
     %tr

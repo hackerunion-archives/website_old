@@ -4,7 +4,9 @@ class MembersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @members = Member.where(:approved => true)
+    @q = Member.search params[:q]
+
+    @members = @q.result.where(:approved => true)
   end
 
   def pending

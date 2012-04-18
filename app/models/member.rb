@@ -11,8 +11,9 @@ class Member < ActiveRecord::Base
                   :approved, :admin
 
   has_and_belongs_to_many :affiliations
-
   has_many :events
+
+  ransackable_associations :affiliations
 
   def approve!
     self.approved = true
