@@ -1,0 +1,4 @@
+- model_class = Announcement
+%h1=t '.pending-title', :default => 'Pending ' + model_class.model_name.human.pluralize
+
+=render partial: 'list', locals: {model_class: model_class}

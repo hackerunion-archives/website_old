@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419150735) do
+ActiveRecord::Schema.define(:version => 20120419184227) do
 
   create_table "affiliations", :force => true do |t|
     t.string "name"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20120419150735) do
   end
 
   add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "by_affiliation_and_member", :unique => true
+
+  create_table "announcements", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.text     "text",                          :null => false
+    t.integer  "member_id"
+    t.boolean  "approved",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "title"
