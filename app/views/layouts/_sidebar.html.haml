@@ -6,8 +6,9 @@
       %li=link_to('Pending Events', pending_events_path)
       %li=link_to('Pending Announcements', pending_announcements_path)
     %br
-  %ul.nav.nav-list
-    %li.nav-header Navigate
-    %li=link_to 'Members', members_path
-    %li=link_to 'Events', events_path
-    %li=link_to 'Announcements', announcements_path
+  - if current_member
+    %ul.nav.nav-list
+      %li.nav-header Navigate
+      %li=link_to 'Members', members_path
+      %li=link_to 'Events', events_path
+      %li=link_to 'Announcements', announcements_path
