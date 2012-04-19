@@ -1,3 +1,12 @@
 %h2 Hello World!!!
 = link_to 'members', members_path
 = link_to 'events', events_path
+
+%h3 Upcoming Events
+%table.table.table-striped
+  - @events.each do |event|
+    %tr
+      %td= link_to event.title, event_path(event)
+      %td
+        Starts on
+        = event.starts.to_s(:long)

@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :event do
     title 'I am a little teapot'
     description 'Short and stout and stuff'
-    starts Date.today
+    starts DateTime.now
     ends DateTime.tomorrow
     approved false
     member_id 1
