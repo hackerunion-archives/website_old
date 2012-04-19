@@ -3,24 +3,17 @@
 
 = form_for @member, :html => { class: 'form-horizontal' } do |f|
   .control-group
-    .control-label
-      = label_tag :name
+    = label_tag :name, nil, class: 'control-label'
     .controls
-      .text_field
-        = text_field_tag :name, @member.name
+      = text_field_tag :name, @member.name, class: 'text-field'
   .control-group
-    .control-label
-      = label_tag :affiliations
+    = label_tag :affiliations, nil, class: 'control-label'
     .controls
-      .text_field
-        = text_field_tag :affiliations, affiliations_list_for(@member)
+      = text_field_tag :affiliations, affiliations_list_for(@member), class: 'text-field'
   .control-group
-    .control-label
-      = label_tag :skills
+    = label_tag :skills, nil, class: 'control-label'
     .controls
-      .text_field
-        = text_field_tag :skills, skills_list_for(@member)
+      = text_field_tag :skills, skills_list_for(@member), class: 'text-field'
   .form-actions
-    .btn.btn-primary
-      = f.submit nil
+    = f.submit nil, class: 'btn btn-primary'
     .btn= link_to t('.cancel', :default => t("helpers.links.cancel")), members_path
