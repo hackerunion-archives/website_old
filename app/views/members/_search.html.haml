@@ -1,25 +1,18 @@
 = search_form_for @q do |f|
   .span6
     .control-group
-      .control-label
-        = f.label 'Affiliation like:'
+      = f.label 'Affiliation like:',  class: 'control-label'
     .controls
-      .text_field
-        = f.text_field :affiliations_name_cont
+      = f.text_field :affiliations_name_cont, class: 'text_field'
   .span6
     .control-group
-      .control-label
-        = f.label 'Skill like:'
+      = f.label 'Skill like:', class: 'control-label'
     .controls
-      .text_field
-        = f.text_field :skills_name_cont
+      = f.text_field :skills_name_cont, class: 'text_field'
   .span6
     .control-group
-      .control-label
-        = f.label 'Ambassadors only?'
+      = f.label 'Ambassadors only?', class: 'control-label'
     .controls
-      .check_box
-        = check_box_tag :ambassador, '0', params[:ambassador] == '0'
+      = check_box_tag :ambassador, '0', params[:ambassador] == '0', class: 'check_box'
   .form-actions
-    .btn.btn-primary
-      = f.submit
+    = f.submit nil, class: 'btn btn-primary'

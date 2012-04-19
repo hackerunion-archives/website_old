@@ -1,7 +1,7 @@
 - model_class = @member.class
 %h1=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human, :default => "Edit #{model_class.model_name.human}")
 
-= form_for @member, :html => { :class => 'form-horizontal' } do |f|
+= form_for @member, :html => { class: 'form-horizontal' } do |f|
   .control-group
     .control-label
       = label_tag :name

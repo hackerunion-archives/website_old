@@ -15,4 +15,4 @@
         %td= member.name
         %td= member.email
         %td= affiliations_list_for(member)
-        %td= button_to t('.approve', :default => t("helpers.links.approve")), approve_member_path(member), :method => 'put', :class => 'btn btn-mini'
+        %td= button_to t('.approve', :default => t("helpers.links.approve")), approve_member_path(member), :method => 'put', class: 'btn btn-mini'

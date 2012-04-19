@@ -1,20 +1,20 @@
-= form_for @event, :html => { :class => 'form-horizontal' } do |f|
+= form_for @event, :html => { class: 'form-horizontal' } do |f|
   .control-group
-    = f.label :title, :class => 'control-label'
+    = f.label :title, class: 'control-label'
     .controls
-      = f.text_field :title, :class => 'text_field'
+      = f.text_field :title, class: 'text_field'
   .control-group
-    = f.label :description, :class => 'control-label'
+    = f.label :description, class: 'control-label'
     .controls
-      = f.text_field :description, :class => 'text_field'
+      = f.text_field :description, class: 'text_field'
   .control-group
-    = f.label :start_time, :class => 'control-label'
+    = f.label :start_time, class: 'control-label'
     .controls
-      = f.datetime_select :start_time, :class => 'time_select'
+      = f.datetime_select :start_time, class: 'time_select'
   .control-group
-    = f.label :end_time, :class => 'control-label'
+    = f.label :end_time, class: 'control-label'
     .controls
-      = f.datetime_select :end_time, :class => 'time_select'
+      = f.datetime_select :end_time, class: 'time_select'
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn'
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, class: 'btn'
