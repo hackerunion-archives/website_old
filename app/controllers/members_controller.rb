@@ -18,6 +18,7 @@ class MembersController < ApplicationController
   def approve
     @member = Member.find(params[:id])
     @member.approve!
+    redirect_to pending_members_path, alert: "'#{@member.name}' successfully approved"
   end
 
   def show
