@@ -1,4 +1,5 @@
 = form_for @event, :html => { class: 'form-horizontal' } do |f|
+  .error=f.error_messages
   .control-group
     = f.label :title, class: 'control-label'
     .controls

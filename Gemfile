@@ -6,6 +6,7 @@ gem 'devise'
 gem 'cancan'
 
 gem 'ransack'
+gem 'dynamic_form'
 
 gem 'haml'
 gem 'jquery-rails'

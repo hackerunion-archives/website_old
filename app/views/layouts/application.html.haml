@@ -22,6 +22,8 @@
         .span3
           =render 'layouts/sidebar'
         .span9
+          -if alert
+            %p.alert.alert-info= alert
           = yield
 
       %footer

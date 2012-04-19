@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
     else
-      render action: "new"
+      render action: "new", alert: 'Event not successfully created.'
     end
   end
 
@@ -59,6 +59,6 @@ class EventsController < ApplicationController
   def approve
     @event = Event.find(params[:id])
     @event.approve!
-    redirect_to pending_events_path
+    redirect_to pending_events_path, alert: "'#{@event.title}' successfully approved"
   end
 end
