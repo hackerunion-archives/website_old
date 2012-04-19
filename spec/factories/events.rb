@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :event do
-    title "MyString"
-    description "MyString"
-    start_time "2012-04-17 13:44:47"
-    end_time "2012-04-17 13:44:47"
-    approved ""
+    title 'I am a little teapot'
+    description 'Short and stout and stuff'
+    starts Date.today
+    ends DateTime.tomorrow
+    approved false
     member_id 1
   end
 end

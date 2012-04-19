@@ -10,8 +10,8 @@ describe MembersController do
   context "Logged in administrator" do
 
     before :each do
-      @user = FactoryGirl.create :member, admin: true, approved: true
-      sign_in @user
+      @member = FactoryGirl.create :member, admin: true, approved: true
+      sign_in @member
     end
 
     it 'lists pending members' do
@@ -44,8 +44,8 @@ describe MembersController do
   context "Logged in, approved member" do
 
     before :each do
-      @user = FactoryGirl.create :member, approved: true
-      sign_in @user
+      @member = FactoryGirl.create :member, approved: true
+      sign_in @member
     end
 
     it 'can see the members directory' do
@@ -62,19 +62,19 @@ describe MembersController do
     end
 
     it 'can add affiliations for himself' do
-      put :update, {id: @user.id,
+      put :update, {id: @member.id,
                     affiliations: "HackerUnion, CyrusInnovation",
                     name: "Bob"}
-      @user.reload
-      @user.name.should eq 'Bob'
-      @user.affiliations.size.should eq 2
+      @member.reload
+      @member.name.should eq 'Bob'
+      @member.affiliations.size.should eq 2
     end
 
     it 'can edit his own skills' do
-      put :update, {id: @user.id,
+      put :update, {id: @member.id,
                     skills: 'Rails, Karate'}
-      @user.reload
-      @user.skills.map(&:name).sort.should eq %w(Karate Rails).sort
+      @member.reload
+      @member.skills.map(&:name).sort.should eq %w(Karate Rails).sort
     end
 
     it 'excludes pending members from member list' do
@@ -100,8 +100,8 @@ describe MembersController do
   context "Logged in, pending member" do
 
     before :each do
-      @user = FactoryGirl.create :member, approved: false
-      sign_in @user
+      @member = FactoryGirl.create :member, approved: false
+      sign_in @member
     end
 
     it 'cannot see the members directory' do

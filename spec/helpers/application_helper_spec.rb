@@ -13,9 +13,9 @@ describe ApplicationHelper do
 
   context 'User login logged in' do
     before :each do
-      @user = FactoryGirl.create :member, email: 'jim@example.com',
+      @member = FactoryGirl.create :member, email: 'jim@example.com',
                                      password: 'fakepass', admin: false
-      sign_in @user
+      sign_in @member
     end
 
     it 'should display edit profile link if user is logged in' do

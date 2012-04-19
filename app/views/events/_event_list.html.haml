@@ -1,0 +1,20 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:start_time)
+      %th= model_class.human_attribute_name(:end_time)
+      %th= model_class.human_attribute_name(:creator)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= link_to event.title, event_path(event)
+        %td= event.description
+        %td= event.start_time
+        %td= event.end_time
+        %td= link_to event.member.email, member_path(event.member)
+        %td= action_buttons(event)
+
+= link_to t('.new', :default => t("helpers.links.new")), new_event_path, class: 'btn btn-primary'
