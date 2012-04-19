@@ -33,6 +33,11 @@ describe ApplicationHelper do
     it 'should not have a pending events link' do
       helper.pending_events_link.should be_nil
     end
+
+    it 'gives nil buttons if user is not an admin' do
+      e = FactoryGirl.create :event, approved: false
+      helper.action_buttons(e).should be_empty
+    end
   end
 
   context 'Admin logged in' do
@@ -48,6 +53,34 @@ describe ApplicationHelper do
 
     it 'should have a pending events link' do
       helper.pending_events_link.should eq link_to('Pending Events', pending_events_path)
+    end
+
+    it 'gives a link to approve a pending event' do
+      m = FactoryGirl.create :member, name: "Jason"
+      e = FactoryGirl.create :event, approved: false, member: m
+      happy_button = button_to 'Approve', approve_event_path(e), :method => 'put', class: 'btn btn-mini'
+      helper.action_buttons(e).should eq happy_button
+    end
+
+    it 'gives a link to approve a pending announcement' do
+      m = FactoryGirl.create :member, name: "Jason"
+      a = FactoryGirl.create :announcement, approved: false, member: m
+      happy_button = button_to 'Approve', approve_announcement_path(a), :method => 'put', class: 'btn btn-mini'
+      helper.action_buttons(a).should eq happy_button
+    end
+
+    it 'hides approve button if event has been approved' do
+       e = FactoryGirl.create :event, approved: true
+
+       helper.action_buttons(e).should_not match 'Approve'
+    end
+
+    it 'gives links to edit or destroy an approved event' do
+      m = FactoryGirl.create :member, name: "Jason"
+      e = FactoryGirl.create :event, approved: true, member: m
+      edit = link_to 'Edit', edit_event_path(e), class: 'btn btn-mini'
+      destroy = link_to 'Destroy', event_path(e), :method => :delete, :confirm => 'Are you sure?', class: 'btn btn-mini btn-danger'
+      helper.action_buttons(e).should eq edit + destroy
     end
   end
 
