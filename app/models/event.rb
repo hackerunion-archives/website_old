@@ -2,7 +2,9 @@ class Event < ActiveRecord::Base
   belongs_to :member
   validate :starts_before_ends?
 
-  scope :upcoming, lambda {|count| where('starts > ?', DateTime.now).order('starts asc').limit(count)}
+  scope :approved, where(approved: true)
+  scope :not_approved, where(approved: false)
+  scope :upcoming, lambda {|count| approved.where('starts > ?', DateTime.now).order('starts asc').limit(count)}
 
   def approve!
     self.approved = true

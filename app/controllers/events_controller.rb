@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   respond_to :html
 
   def index
-    @events = Event.find_all_by_approved(true)
+    @events = Event.approved
 
     respond_with @events
   end
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   end
 
   def pending
-    @events = Event.find_all_by_approved(false)
+    @events = Event.not_approved
     respond_with @events
   end
 
