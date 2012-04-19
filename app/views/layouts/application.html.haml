@@ -20,14 +20,10 @@
     .container-fluid
       .row-fluid
         .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= pending_members_link
-              %li= pending_events_link
+          =render 'layouts/sidebar'
         .span9
           = yield
-    
+
       %footer
         %p &copy; Hacker Union 2012
     /

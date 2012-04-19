@@ -1,8 +1,5 @@
-%h2 Hello World!!!
-= link_to 'members', members_path
-= link_to 'events', events_path
-
-%h3 Upcoming Events
+%h2
+  %center Upcoming Events
 %table.table.table-striped
   - @events.each do |event|
     %tr
@@ -10,3 +7,15 @@
       %td
         Starts on
         = event.starts.to_s(:long)
+%br
+%hr{style: 'border: 1px solid #000'}
+%h2
+  %center Latest Announcements
+%table.table.table-striped
+  - @announcements.each do |announcement|
+    %tr
+      %td= link_to announcement.title, announcement_path(announcement)
+      %td= announcement.text
+      %td
+        = distance_of_time_in_words_to_now(announcement.created_at)
+        ago.

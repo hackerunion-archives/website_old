@@ -26,14 +26,6 @@ describe ApplicationHelper do
       helper.login_or_logout_link.should match(/logout/i)
     end
 
-    it 'should not have a pending members link' do
-      helper.pending_members_link.should be_nil
-    end
-
-    it 'should not have a pending events link' do
-      helper.pending_events_link.should be_nil
-    end
-
     it 'gives nil buttons if user is not an admin' do
       e = FactoryGirl.create :event, approved: false
       helper.action_buttons(e).should be_empty
@@ -45,14 +37,6 @@ describe ApplicationHelper do
       @admin = FactoryGirl.create :member, email: 'jim@example.com',
                                      password: 'fakepass', admin: true
       sign_in @admin
-    end
-
-    it 'should have a pending members link' do
-      helper.pending_members_link.should eq link_to('Pending Members', pending_members_path)
-    end
-
-    it 'should have a pending events link' do
-      helper.pending_events_link.should eq link_to('Pending Events', pending_events_path)
     end
 
     it 'gives a link to approve a pending event' do
