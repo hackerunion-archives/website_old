@@ -3,8 +3,8 @@
     %tr
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:start_time)
-      %th= model_class.human_attribute_name(:end_time)
+      %th= model_class.human_attribute_name(:starts)
+      %th= model_class.human_attribute_name(:ends)
       %th= model_class.human_attribute_name(:creator)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -12,8 +12,8 @@
       %tr
         %td= link_to event.title, event_path(event)
         %td= event.description
-        %td= event.start_time
-        %td= event.end_time
+        %td= event.starts
+        %td= event.ends
         %td= link_to event.member.email, member_path(event.member)
         %td= action_buttons(event)
 

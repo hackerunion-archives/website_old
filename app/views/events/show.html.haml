@@ -10,13 +10,13 @@
   %br
   = @event.description
 %p
-  %strong= model_class.human_attribute_name(:start_time) + ':'
+  %strong= model_class.human_attribute_name(:starts) + ':'
   %br
-  = @event.start_time
+  = @event.starts
 %p
-  %strong= model_class.human_attribute_name(:end_time) + ':'
+  %strong= model_class.human_attribute_name(:ends) + ':'
   %br
-  = @event.end_time
+  = @event.ends
 %p
   %strong= model_class.human_attribute_name(:approved) + ':'
   %br

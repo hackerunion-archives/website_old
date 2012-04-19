@@ -8,13 +8,13 @@
     .controls
       = f.text_field :description, class: 'text_field'
   .control-group
-    = f.label :start_time, class: 'control-label'
+    = f.label :starts, class: 'control-label'
     .controls
-      = f.datetime_select :start_time, class: 'time_select'
+      = f.datetime_select :starts, class: 'time_select'
   .control-group
-    = f.label :end_time, class: 'control-label'
+    = f.label :ends, class: 'control-label'
     .controls
-      = f.datetime_select :end_time, class: 'time_select'
+      = f.datetime_select :ends, class: 'time_select'
   .form-actions
     = f.submit nil, class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, class: 'btn'
