@@ -10,10 +10,16 @@ class Ability
     elsif member.approved?
       can :read, :all
       can :update, Member, id: member.id
+      can :create, Event
       cannot :update, Event
+      can :create, Announcement
+      cannot :update, Announcement
     else
       cannot :read, Member
-      cannot :update, Event
+      #cannot :update, Member
+      #cannot :destroy, Member
+      cannot :manage, Event
+      cannot :manage, Announcement
     end
 
   end
