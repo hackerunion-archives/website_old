@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
-
   before_filter :authenticate_member!, :only => [:index]
+
   load_and_authorize_resource
 
   def index

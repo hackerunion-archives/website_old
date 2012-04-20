@@ -9,7 +9,21 @@ describe MembersHelper do
     a2 = m.affiliations.build
     a2.name = "Something Else"
 
-    helper.affiliations_list_for(m).should eq "Cyrus, Something Else"
+    helper.affiliations_list_for(m).should match /q\[affiliations_name_cont\]=Cyrus/
+    helper.affiliations_list_for(m).should match /q\[affiliations_name_cont\]=Something Else/
+  end
+
+  it "creates a commalist of skill names" do
+    m = Member.new :name => "Jim"
+    a1 = m.skills.build
+    a1.name = 'Rails'
+    a2 = m.skills.build
+    a2.name = 'Karate Do'
+
+    p helper.skills_list_for(m)
+
+    helper.skills_list_for(m).should match /q\[skills_name_cont\]=Rails/
+    helper.skills_list_for(m).should match /q\[skills_name_cont\]=Karate Do/
   end
 
   it "generates html for an Ambassador button" do
@@ -50,14 +64,5 @@ describe MembersHelper do
     helper.toggle_admin_button(m.id).should be_nil
   end
 
-  it "creates a commalist of skill names" do
-    m = Member.new :name => "Jim"
-    a1 = m.skills.build
-    a1.name = 'Rails'
-    a2 = m.skills.build
-    a2.name = 'Karate Do'
-
-    helper.skills_list_for(m).should eq 'Rails, Karate Do'
-  end
 
 end
