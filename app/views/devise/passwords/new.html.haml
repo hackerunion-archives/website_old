@@ -1,9 +1,10 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+%h2.offset1 Forgot your password?
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: 'post', class: 'form-horizontal' }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div= f.submit "Send me reset password instructions"
-= render "links"
+  .control-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.email_field :email, class: 'text-field'
+  .row
+    .span2.offset2= f.submit 'Send me reset password instructions', class: 'btn btn-primary'
+= render 'links'

@@ -1,9 +1,10 @@
-%h2 Resend unlock instructions
-= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
+%h2.offset1 Resend unlock instructions
+= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: 'post', class: 'form-horizontal' }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div= f.submit "Resend unlock instructions"
-= render "links"
+  .control-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.email_field :email, class: 'text-field'
+  .row
+    .span4.offset2= f.submit 'Resend unlock instructions', class: 'btn btn-primary'
+= render 'links'
