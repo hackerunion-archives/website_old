@@ -10,10 +10,10 @@
     = @member.email
   .row
     %strong= model_class.human_attribute_name(:affiliations) + ':'
-    = affiliations_list_for(@member) || "This user has no affiliations yet."
+    = comma_list_of_affiliations_for(@member) || "This user has no affiliations yet."
   .row
     %strong= model_class.human_attribute_name(:skills) + ':'
-    = skills_list_for(@member) || "This user has no skills yet."
+    = comma_list_of_skills_for(@member) || "This user has no skills yet."
 
   .row
     %strong= model_class.human_attribute_name(:ambassador) + ':'

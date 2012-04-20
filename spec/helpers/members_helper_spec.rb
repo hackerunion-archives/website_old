@@ -9,11 +9,31 @@ describe MembersHelper do
     a2 = m.affiliations.build
     a2.name = "Something Else"
 
+    helper.comma_list_of_affiliations_for(m).should eq "Cyrus, Something Else"
+  end
+
+  it "creates a commalist of skill names" do
+    m = Member.new :name => "Jim"
+    a1 = m.skills.build
+    a1.name = "Rails"
+    a2 = m.skills.build
+    a2.name = "Karate Do"
+
+    helper.comma_list_of_skills_for(m).should eq "Rails, Karate Do"
+  end
+
+  it "creates a magical ransacky list of affiliation names" do
+    m = Member.new :name => "Jim"
+    a1 = m.affiliations.build
+    a1.name = "Cyrus"
+    a2 = m.affiliations.build
+    a2.name = "Something Else"
+
     helper.affiliations_list_for(m).should match /q\[affiliations_name_cont\]=Cyrus/
     helper.affiliations_list_for(m).should match /q\[affiliations_name_cont\]=Something Else/
   end
 
-  it "creates a commalist of skill names" do
+  it "creates a magical ransacky list of skill names" do
     m = Member.new :name => "Jim"
     a1 = m.skills.build
     a1.name = 'Rails'

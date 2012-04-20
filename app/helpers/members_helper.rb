@@ -1,5 +1,15 @@
 module MembersHelper
 
+  def comma_list_of_affiliations_for member
+    return if member.affiliations.nil?
+    member.affiliations.collect(&:name).join(', ')
+  end
+
+  def comma_list_of_skills_for member
+    return if member.skills.nil?
+    member.skills.collect(&:name).join(', ')
+  end
+
   def affiliations_list_for member
     return if member.affiliations.nil?
     links = member.affiliations.map do |a|
