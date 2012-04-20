@@ -2,24 +2,27 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
-  context 'User logged out' do
-    it 'should display login link if no one is logged in' do
+  context 'Member logged out' do
+    it 'should display login link' do
         helper.login_or_logout_link.should match(/login/i)
     end
-    it 'should display sign up link if no one is logged in' do
-      helper.sign_up_or_edit_profile_link.should match(/Sign up/i)
+    it 'should display sign up link' do
+      helper.sign_up_or_edit_registration_link.should match(/Sign up/i)
+    end
+    it 'should not display edit profile' do
+      helper.edit_profile_link.should be_nil
     end
   end
 
-  context 'User login logged in' do
+  context 'Member logged in' do
     before :each do
       @member = FactoryGirl.create :member, email: 'jim@example.com',
                                      password: 'fakepass', admin: false
       sign_in @member
     end
 
-    it 'should display edit profile link if user is logged in' do
-      helper.sign_up_or_edit_profile_link.should match(/Edit profile/i)
+    it 'should display edit registration link if user is logged in' do
+      helper.sign_up_or_edit_registration_link.should match(/Edit Account/i)
     end
 
     it 'should display logout link if user is logged in' do
@@ -29,6 +32,10 @@ describe ApplicationHelper do
     it 'gives nil buttons if user is not an admin' do
       e = FactoryGirl.create :event, approved: false
       helper.action_buttons(e).should be_empty
+    end
+
+    it 'should display link to edit profile' do
+      helper.edit_profile_link.should match /Edit Profile/
     end
   end
 
@@ -55,7 +62,6 @@ describe ApplicationHelper do
 
     it 'hides approve button if event has been approved' do
        e = FactoryGirl.create :event, approved: true
-
        helper.action_buttons(e).should_not match 'Approve'
     end
 
@@ -66,6 +72,11 @@ describe ApplicationHelper do
       destroy = link_to 'Destroy', event_path(e), :method => :delete, :confirm => 'Are you sure?', class: 'btn btn-mini btn-danger'
       helper.action_buttons(e).should eq edit + destroy
     end
+
+    it 'should display link to edit profile' do
+      helper.edit_profile_link.should match /Edit Profile/
+    end
+
   end
 
 end

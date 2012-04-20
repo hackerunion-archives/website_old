@@ -8,6 +8,7 @@ HackerUnion::Application.routes.draw do
     member do
       put :approve
       put :toggle_ambassador
+      get :edit_profile
     end
     collection do
       get :pending

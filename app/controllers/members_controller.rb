@@ -25,7 +25,7 @@ class MembersController < ApplicationController
     @member = Member.find params[:id]
   end
 
-  def edit
+  def edit_profile
     @member = Member.find params[:id]
   end
 

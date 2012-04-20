@@ -8,11 +8,17 @@ module ApplicationHelper
     end
   end
 
-  def sign_up_or_edit_profile_link
+  def sign_up_or_edit_registration_link
     if member_signed_in?
-      link_to 'Edit profile', edit_member_registration_path
+      link_to 'Edit Account', edit_member_registration_path
     else
       link_to 'Sign up', new_member_registration_path
+    end
+  end
+
+  def edit_profile_link
+    if member_signed_in?
+      link_to( 'Edit Profile', edit_profile_member_path(current_member) )
     end
   end
 
