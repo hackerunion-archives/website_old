@@ -23,7 +23,8 @@ class Member < ActiveRecord::Base
   end
 
   def self.find_for_github_oauth(access_token, signed_in_resource=nil)
-    data = access_token['raw_info']
+    data = access_token['info']
+    Rails.logger.info access_token
     if member = Member.where(:email => data["email"]).first
       member
     else
