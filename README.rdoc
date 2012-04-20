@@ -6,13 +6,13 @@ http://hackerunion.herokuapp.com/
 
 == IMPORTANT INFORMATION
 
-1) Github oauth is currently registered under the Github account JBerryCyrus (it can be transferred).
+1) Github oauth is currently registered under the Github account HackerUnion.
 
 2) config/initializers/devise.rb requires ENV['GITHUB_KEY'] and ENV['GITHUB_SECRET'] -- this information can be found with $ heroku config when in the app's directory. In development, attempting to login with Github will behave uncertainly.
 
 3) Logging in with Github REQUIRES an email address being set in the Github account, or it will die horribly. You're warned. Horribly. We mean it.
 
-4) Deploying to heroku is as simple as "git push heroku" once git has been configured to have heroku as a remote. The information can be found within Heroku (https://api.heroku.com/myapps/hackerunion) and is beyond the scope of this README.
+4) Deploying to heroku is as simple as "git push heroku" once git has been configured to have heroku as a remote. The information can be found within Heroku (https://api.heroku.com/myapps/hackerunion) and is beyond the scope of this README. Jon is the current owner of the heroku app.
 
 5) rvm is not necessary but if you do use it, it wants 1.9.3 and a gemset called 'hackerunion'
 
