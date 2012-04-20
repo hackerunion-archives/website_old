@@ -7,16 +7,29 @@ http://hackerunion.herokuapp.com/
 == IMPORTANT INFORMATION
 
 1) Github oauth is currently registered under the Github account JBerryCyrus (it can be transferred).
+
 2) config/initializers/devise.rb requires ENV['GITHUB_KEY'] and ENV['GITHUB_SECRET'] -- this information can be found with $ heroku config when in the app's directory. In development, attempting to login with Github will behave uncertainly.
+
 3) Logging in with Github REQUIRES an email address being set in the Github account, or it will die horribly. You're warned. Horribly. We mean it.
+
 4) Deploying to heroku is as simple as "git push heroku" once git has been configured to have heroku as a remote. The information can be found within Heroku (https://api.heroku.com/myapps/hackerunion) and is beyond the scope of this README.
+
 5) rvm is not necessary but if you do use it, it wants 1.9.3 and a gemset called 'hackerunion'
+
 6) either way, get started with 'gem install bundler --no-rdoc --no-ri && bundle install'.
+
 7) For the sake of a safe environment, run everything with the prefix "bundle exec"
+
 8) The views are using HAML (it's fairly obvious as soon as you look at one, but the earlier you know, the better).
+
 9) The tests are using rspec. Run them with 'bundle exec rake rspec'
+
 10) We are using devise for authentication and, for permissions, a gem called 'cancan' (https://github.com/ryanb/cancan). The meat of the logic is in models/ability.rb (and there is something in controllers/application_controller.rb about denied access).
+
 11) Member holds logic for authentication/permission as well as business logic (relationships with affiliations and skills). We have separated these concerns by providing "Edit Account" and "Edit Profile" at the top. We weren't sure this was the best behavior, but it was certainly the easiest to implement. Anything else, to our current understanding, requires inheriting from a Devise controller, overriding a method, and changing a route to point to that.
+
 12) The database is sqlite3 in development/test - and to help you get started, you can run 'bundle exec rake db:migrate && bundle exec rake db:seed'. Running them chained under one rake command causes a failure, which is probably a bug in Rails.
+
 13) Left out because it's bad luck.
+
 14) Profit.
