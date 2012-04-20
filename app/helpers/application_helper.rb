@@ -35,4 +35,12 @@ module ApplicationHelper
     raw buttons
   end
 
+  def open_issue
+    raw link_to('Open an issue', 'https://github.com/hackerunion/website/issues')
+  end
+
+  def fork_us_on_github
+    raw link_to('Fork us on github', 'https://github.com/hackerunion/website')
+  end
+
 end
