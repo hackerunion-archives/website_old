@@ -39,6 +39,14 @@ describe MembersController do
       response.should redirect_to member_path(m.id)
     end
 
+    it 'can change a members admin status' do
+      m = FactoryGirl.create :member, name: 'Jason', admin: false
+      put :toggle_admin, id: m.id
+      m.reload
+      m.admin.should be_true
+      response.should redirect_to member_path(m.id)
+    end
+
   end
 
   context "Logged in, approved member" do
@@ -95,6 +103,13 @@ describe MembersController do
       response.should redirect_to root_path
     end
 
+    it 'cannot change a members admin status' do
+      m = FactoryGirl.create :member, name: 'Jason', admin: false
+      put :toggle_admin, id: m.id
+      m.reload
+      m.admin.should be_false
+      response.should redirect_to root_path
+    end
   end
 
   context "Logged in, pending member" do
@@ -118,6 +133,14 @@ describe MembersController do
     response.should redirect_to root_path
   end
 
+  it 'cannot change a members admin status' do
+    m = FactoryGirl.create :member, name: 'Jason', ambassador: false, admin: false
+    put :toggle_admin, id: m.id
+    m.reload
+    m.admin.should be_false
+    response.should redirect_to root_path
+  end
+
   context "Logged out" do
 
     it 'cannot see the members directory' do
@@ -133,6 +156,13 @@ describe MembersController do
       response.should redirect_to root_path
     end
 
+    it 'cannot change a members admin status' do
+      m = FactoryGirl.create :member, name: 'Jason'
+      put :toggle_admin, id: m.id
+      m.reload
+      m.admin.should be_false
+      response.should redirect_to root_path
+    end
   end
 
 end

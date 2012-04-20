@@ -57,6 +57,13 @@ class MembersController < ApplicationController
     redirect_to member_path(m.id)
   end
 
+  def toggle_admin
+    m = Member.find(params[:id])
+    m.admin = !m.admin?
+    m.save!
+    redirect_to member_path(m.id)
+  end
+
 private
 
   def approved_member?

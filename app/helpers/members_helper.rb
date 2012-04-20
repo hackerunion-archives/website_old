@@ -14,7 +14,13 @@ module MembersHelper
 
   def toggle_ambassador_button id
     if current_member.admin?
-      button_to('Toggle Ambassador Status', toggle_ambassador_member_path(id), method: 'put')
+      button_to('Toggle Ambassador Status', toggle_ambassador_member_path(id), method: 'put', class: 'btn btn-primary')
+    end
+  end
+
+  def toggle_admin_button id
+    if current_member.admin?
+      button_to('Toggle Admin Status', toggle_admin_member_path(id), method: 'put', class: 'btn btn-primary')
     end
   end
 

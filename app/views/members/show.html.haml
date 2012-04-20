@@ -1,24 +1,27 @@
 - model_class = @member.class
 %h1=t '.title', :default => model_class.model_name.human
 
-%p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @member.name || "This user has not entered their name yet."
-%p
-  %strong= model_class.human_attribute_name(:email) + ':'
-  %br
-  = @member.email
-%p
-  %strong= model_class.human_attribute_name(:affiliations) + ':'
-  %br
-  = affiliations_list_for(@member) || "This user has no affiliations yet."
-%p
-  %strong= model_class.human_attribute_name(:skills) + ':'
-  %br
-  = skills_list_for(@member) || "This user has no affiliations yet."
-%p
-  %strong= model_class.human_attribute_name(:ambassador) + ':'
-  -if @member.ambassador?
-    #ambassador{style: "float: left; margin-right: 10px;"}=image_tag 'dolphin.jpg'
-  =toggle_ambassador_button(@member.id)
+.span12
+  .row
+    %strong= model_class.human_attribute_name(:name) + ':'
+    = @member.name || "This user has not entered their name yet."
+  .row
+    %strong= model_class.human_attribute_name(:email) + ':'
+    = @member.email
+  .row
+    %strong= model_class.human_attribute_name(:affiliations) + ':'
+    = affiliations_list_for(@member) || "This user has no affiliations yet."
+  .row
+    %strong= model_class.human_attribute_name(:skills) + ':'
+    = skills_list_for(@member) || "This user has no skills yet."
+
+  .row
+    %strong= model_class.human_attribute_name(:ambassador) + ':'
+    -if @member.ambassador?
+      #ambassador{style: "margin-right: 10px;", class: 'icon-user'}
+    =toggle_ambassador_button(@member.id)
+  .row
+    %strong= model_class.human_attribute_name(:admin) + ':'
+    -if @member.admin?
+      #admin{style: "margin-right: 10px;", class: 'icon-eye-open'}
+    =toggle_admin_button(@member.id)
