@@ -16,8 +16,6 @@ class Ability
       cannot :update, Announcement
     else
       cannot :read, Member
-      #cannot :update, Member
-      #cannot :destroy, Member
       cannot :manage, Event
       cannot :manage, Announcement
     end
