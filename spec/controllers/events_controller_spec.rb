@@ -144,6 +144,15 @@ describe EventsController do
         response.should redirect_to(events_url)
       end
     end
+
+    it 'should not be allowed to approve a pending event' do
+      event = FactoryGirl.create :event, approved: false
+      put :approve, id: event.id
+      response.should redirect_to root_path
+      event.reload
+      event.should_not be_approved
+    end
+
   end
 
 end

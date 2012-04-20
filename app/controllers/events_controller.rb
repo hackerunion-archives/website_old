@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   before_filter :authenticate_member!, :only => [:new, :create]
   respond_to :html
 
+  load_and_authorize_resource
+
   def index
     @events = Event.approved
 
