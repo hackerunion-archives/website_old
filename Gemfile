@@ -4,6 +4,7 @@ gem 'rails', '3.2.1'
 gem 'pg'
 gem 'devise'
 gem 'cancan'
+gem 'omniauth-github'
 
 gem 'ransack'
 gem 'dynamic_form'

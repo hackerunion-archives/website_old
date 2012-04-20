@@ -220,4 +220,10 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  if Rails.env.production?
+    config.omniauth :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+  else
+    # do nothing, fail horribly in other environments. We can't test it.
+    # Damn you, Github. Damn you for caring about security over testability.
+  end
 end
