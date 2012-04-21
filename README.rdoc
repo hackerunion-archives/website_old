@@ -32,4 +32,8 @@ http://hackerunion.herokuapp.com/
 
 13) Left out because it's bad luck.
 
-14) Profit.
+14) We're using the 'ransack' gem for the filtering/searching on the member list. It does a weird magical coupling between the view and the model, which makes testing it kind of awkward. Not my first choice, and some logic will have to be ripped out if/when that implementation choice changes.
+
+15) There's no better time than 1:25AM to remember that you actually have not added half the indexes you had planned on adding, but never created an issue for.
+
+16) Profit.
