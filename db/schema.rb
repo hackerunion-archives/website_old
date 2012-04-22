@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120419184227) do
   end
 
   add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "by_affiliation_and_member", :unique => true
+  add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "index_affiliations_members_on_affiliation_id_and_member_id"
 
   create_table "announcements", :force => true do |t|
     t.string   "title",                         :null => false
@@ -36,12 +37,12 @@ ActiveRecord::Schema.define(:version => 20120419184227) do
   create_table "events", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "starts"
-    t.datetime "ends"
     t.boolean  "approved",    :default => false
     t.integer  "member_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.datetime "starts"
+    t.datetime "ends"
   end
 
   create_table "members", :force => true do |t|
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120419184227) do
   end
 
   add_index "members_skills", ["member_id", "skill_id"], :name => "by_member_and_skill", :unique => true
+  add_index "members_skills", ["member_id", "skill_id"], :name => "index_members_skills_on_member_id_and_skill_id"
 
   create_table "skills", :force => true do |t|
     t.string "name"

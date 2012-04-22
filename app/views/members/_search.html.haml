@@ -1,18 +1,22 @@
+%p Find members with:
 = search_form_for @q do |f|
-  .span6
-    .control-group
-      = f.label 'Affiliation like:',  class: 'control-label'
-    .controls
-      = f.text_field :affiliations_name_cont, class: 'text_field'
-  .span6
-    .control-group
-      = f.label 'Skill like:', class: 'control-label'
-    .controls
-      = f.text_field :skills_name_cont, class: 'text_field'
-  .span6
-    .control-group
-      = f.label 'Ambassadors only?', class: 'control-label'
-    .controls
-      = check_box_tag :ambassador, '0', params[:ambassador] == '0', class: 'check_box'
+  .row
+    .span3
+      .control-group
+        = f.label 'Affiliation like:',  class: 'control-label'
+      .controls
+        = f.text_field :affiliations_name_cont, class: 'text_field'
+    .span3
+      .control-group
+        = f.label 'Skill like:', class: 'control-label'
+      .controls
+        = f.text_field :skills_name_cont, class: 'text_field'
+    .span6
+      .span2
+        .control-group
+          = f.label 'Ambassadors only?', class: 'control-label'
+      .span1
+        .controls
+          = check_box_tag :ambassador, '0', params[:ambassador] == '0', class: 'check_box'
   .form-actions
     = f.submit nil, class: 'btn btn-primary'
