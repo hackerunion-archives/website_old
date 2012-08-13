@@ -5,10 +5,12 @@
     %tr
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:email)
+      %th= model_class.human_attribute_name(:whyhacker)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @members.each do |member|
       %tr
         %td= link_to member.name, member_path(member)
         %td= member.email
+        %td= member.whyhacker
         %td= button_to t('.approve', :default => t("helpers.links.approve")), approve_member_path(member), :method => 'put', class: 'btn btn-mini'
