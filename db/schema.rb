@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419184227) do
+ActiveRecord::Schema.define(:version => 20120813161512) do
 
   create_table "affiliations", :force => true do |t|
     t.string "name"
@@ -23,44 +23,46 @@ ActiveRecord::Schema.define(:version => 20120419184227) do
   end
 
   add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "by_affiliation_and_member", :unique => true
+  add_index "affiliations_members", ["affiliation_id", "member_id"], :name => "index_affiliations_members_on_affiliation_id_and_member_id"
 
   create_table "announcements", :force => true do |t|
-    t.string   "title",                         :null => false
-    t.text     "text",                          :null => false
-    t.integer  "member_id"
-    t.boolean  "approved",   :default => false, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string    "title",                         :null => false
+    t.text      "text",                          :null => false
+    t.integer   "member_id"
+    t.boolean   "approved",   :default => false, :null => false
+    t.timestamp "created_at",                    :null => false
+    t.timestamp "updated_at",                    :null => false
   end
 
   create_table "events", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.boolean  "approved",    :default => false
-    t.integer  "member_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.datetime "starts"
-    t.datetime "ends"
+    t.string    "title"
+    t.string    "description"
+    t.boolean   "approved",    :default => false
+    t.integer   "member_id"
+    t.timestamp "created_at",                     :null => false
+    t.timestamp "updated_at",                     :null => false
+    t.timestamp "starts"
+    t.timestamp "ends"
   end
 
   create_table "members", :force => true do |t|
-    t.string   "name"
-    t.boolean  "approved",               :default => false, :null => false
-    t.string   "email",                  :default => "",    :null => false
-    t.string   "encrypted_password",     :default => "",    :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.boolean  "admin",                  :default => false
-    t.boolean  "ambassador",             :default => false
+    t.string    "name"
+    t.boolean   "approved",               :default => false, :null => false
+    t.string    "email",                  :default => "",    :null => false
+    t.string    "encrypted_password",     :default => "",    :null => false
+    t.string    "reset_password_token"
+    t.timestamp "reset_password_sent_at"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",          :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.timestamp "created_at",                                :null => false
+    t.timestamp "updated_at",                                :null => false
+    t.boolean   "admin",                  :default => false
+    t.boolean   "ambassador",             :default => false
+    t.text      "whyhacker"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120419184227) do
   end
 
   add_index "members_skills", ["member_id", "skill_id"], :name => "by_member_and_skill", :unique => true
+  add_index "members_skills", ["member_id", "skill_id"], :name => "index_members_skills_on_member_id_and_skill_id"
 
   create_table "skills", :force => true do |t|
     t.string "name"
