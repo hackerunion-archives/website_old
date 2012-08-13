@@ -86,11 +86,8 @@
      var user_info = $('#ajax_signup').serialize();
      $.ajax({
        type: "POST",
-       url: "/members",
+       url: "/members.json",
        data: user_info,
-       success: function(json){
-         console.log("The Devise Response: " + JSON.stringify(json));
-        },
        dataType: "json"
      });
 
