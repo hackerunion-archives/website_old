@@ -16,3 +16,4 @@
 /tmp
 /.idea
 *.swp
+.DS_Store
