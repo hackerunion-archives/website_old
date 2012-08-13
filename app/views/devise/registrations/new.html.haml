@@ -7,8 +7,7 @@
     %div.steps
       %div
         %a.btn.btn-big.btn-primary{:href => '#step1'} Apply Now
-
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+= form_for(:member, :url => "#", :html => { :id => "ajax_signup"}) do |f|
   = devise_error_messages!
   %div#step1.section.orange
     %div.container
@@ -29,9 +28,10 @@
   %div#step2.section.beige
     %div.container
       %h2 What city are you nearest to?
+      = f.hidden_field :city
       %div.map
         %ul.cities
-          %li.newyork.selected New York
+          %li.newyork#selected New York
           %li.sanfrancisco San Francisco
           %li.portland Portland
           %li.austin Austin
@@ -77,8 +77,24 @@
       event.preventDefault();
     });
     $('ul.cities li').click(function (){
-      $('.selected').removeClass('selected');
-      $(this).addClass('selected')
+      $('#selected').removeAttr('id');
+      $(this).attr('id', 'selected');
+      $('#member_city').val($(this).attr('class'));
     });
+     $("#finish").click(function(e){
+     $('')
+     var user_info = $('#ajax_signup').serialize();
+     $.ajax({
+       type: "POST",
+       url: "/members",
+       data: user_info,
+       success: function(json){
+         console.log("The Devise Response: " + JSON.stringify(json));
+        },
+       dataType: "json"
+     });
+
+  });
+
 
   });

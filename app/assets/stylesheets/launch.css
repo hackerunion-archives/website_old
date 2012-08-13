@@ -157,7 +157,7 @@ textarea:focus {
 }
 
 #logo {
-	background: transparent url(../images/masthead.png) no-repeat top center;
+	background: transparent url(<%= asset_path 'masthead.png' %>) no-repeat top center;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -188,7 +188,7 @@ textarea:focus {
 }
 
 	.section.beige {background: #F4F5ED;}
-	.section.orange {background: #ff5a3e url(../images/workers.png) repeat-x 0 0;}
+	.section.orange {background: #ff5a3e url(<%= asset_path 'workers.png' %>) repeat-x 0 0;}
 	.section.white {background: #fff;}
 	.section.brown {background: #514034;}
 
@@ -218,7 +218,7 @@ textarea:focus {
 }
 
 .map {
-	background: url(../images/map.png) no-repeat 0 0;
+	background: url(<%= asset_path 'map.png' %>) no-repeat 0 0;
 	width: 620px;
 	height: 400px;
 	margin: 0 auto;
@@ -247,37 +247,37 @@ ul.cities li:hover {
 	background-color: #ff5a3e;
 	color: #fff;
 }
-ul.cities li.selected {
+ul.cities li#selected {
 	color: #fff;
 }
 
 ul.cities li.newyork:hover,
-ul.cities li.newyork.selected {
+ul.cities li.newyork#selected {
 	background-color: #ff5a3e;
 }
 
 ul.cities li.sanfrancisco:hover,
-ul.cities li.sanfrancisco.selected {
+ul.cities li.sanfrancisco#selected {
 	background-color: #00aeef;
 }
 
 ul.cities li.seattle:hover,
-ul.cities li.seattle.selected {
+ul.cities li.seattle#selected {
 	background-color: #10a15f;
 }
 
 ul.cities li.portland:hover,
-ul.cities li.portland.selected {
+ul.cities li.portland#selected {
 	background-color: #9fa110;
 }
 
 ul.cities li.austin:hover,
-ul.cities li.austin.selected {
+ul.cities li.austin#selected {
 	background-color: #a94899;
 }
 
 ul.cities li.boulder:hover,
-ul.cities li.boulder.selected {
+ul.cities li.boulder#selected {
 	background-color: #f7941d;
 }
 
